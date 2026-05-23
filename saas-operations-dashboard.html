@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechFlow — Operations & Efficiency Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #07090F;
+  --surface: #0D1220;
+  --surface2: #111827;
+  --border: #1E2D45;
+  --border-light: #243550;
+  --teal: #00C2A8;
+  --teal-dim: rgba(0,194,168,0.12);
+  --teal-glow: rgba(0,194,168,0.25);
+  --blue: #3B82F6;
+  --blue-dim: rgba(59,130,246,0.12);
+  --amber: #F59E0B;
+  --amber-dim: rgba(245,158,11,0.12);
+  --red: #EF4444;
+  --red-dim: rgba(239,68,68,0.1);
+  --green: #10B981;
+  --green-dim: rgba(16,185,129,0.12);
+  --text: #E2E8F0;
+  --text-mid: #94A3B8;
+  --text-dim: #4B6080;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-mark {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--teal), #007a6e);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700; font-size: 12px;
+  color: #fff;
+  box-shadow: 0 0 16px var(--teal-glow);
+}
+.logo-text {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text);
+}
+.logo-sub {
+  font-size: 10px;
+  color: var(--text-dim);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.last-updated {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'Space Mono', monospace;
+}
+
+.live-dot-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--teal);
+  font-weight: 500;
+}
+.live-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+  animation: livePulse 2s ease infinite;
+}
+@keyframes livePulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--teal-glow); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 4px transparent; }
+}
+
+/* ── SUBBAR (filters) ── */
+.subbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.filter-label {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.filter-tabs {
+  display: flex;
+  gap: 4px;
+}
+.tab {
+  padding: 5px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  color: var(--text-mid);
+  background: transparent;
+  transition: all 0.18s ease;
+  letter-spacing: 0.02em;
+}
+.tab:hover {
+  color: var(--text);
+  background: var(--surface2);
+  border-color: var(--border);
+}
+.tab.active {
+  color: var(--teal);
+  background: var(--teal-dim);
+  border-color: rgba(0,194,168,0.3);
+}
+
+.subbar-meta {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: 'Space Mono', monospace;
+  white-space: nowrap;
+}
+
+/* ── MAIN ── */
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 28px 48px;
+}
+
+/* ── SECTION HEADER ── */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.section-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── KPI CARDS ── */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.2s;
+}
+.kpi-card.visible { opacity: 1; transform: translateY(0); }
+.kpi-card:hover { border-color: var(--border-light); }
+
+.kpi-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  border-radius: 2px 2px 0 0;
+}
+.kpi-card.c-teal::before { background: linear-gradient(90deg, var(--teal), transparent); }
+.kpi-card.c-blue::before { background: linear-gradient(90deg, var(--blue), transparent); }
+.kpi-card.c-amber::before { background: linear-gradient(90deg, var(--amber), transparent); }
+.kpi-card.c-green::before { background: linear-gradient(90deg, var(--green), transparent); }
+
+.kpi-icon-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.kpi-icon {
+  width: 36px; height: 36px;
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.kpi-card.c-teal .kpi-icon { background: var(--teal-dim); }
+.kpi-card.c-blue .kpi-icon { background: var(--blue-dim); }
+.kpi-card.c-amber .kpi-icon { background: var(--amber-dim); }
+.kpi-card.c-green .kpi-icon { background: var(--green-dim); }
+
+.kpi-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-family: 'Space Mono', monospace;
+}
+.badge-up { background: rgba(16,185,129,0.15); color: var(--green); }
+.badge-down { background: rgba(239,68,68,0.12); color: var(--red); }
+
+.kpi-value {
+  font-family: 'Space Mono', monospace;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: -1px;
+}
+.kpi-card.c-teal .kpi-value { color: var(--teal); }
+.kpi-card.c-blue .kpi-value { color: var(--blue); }
+.kpi-card.c-amber .kpi-value { color: var(--amber); }
+.kpi-card.c-green .kpi-value { color: var(--green); }
+
+.kpi-label {
+  font-size: 12px;
+  color: var(--text-mid);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.kpi-sub {
+  font-size: 10px;
+  color: var(--text-dim);
+}
+
+/* ── CHART GRID ── */
+.chart-grid-2 {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.chart-grid-2b {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.chart-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s;
+}
+.chart-card.visible { opacity: 1; transform: translateY(0); }
+.chart-card:hover { border-color: var(--border-light); }
+
+.chart-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  gap: 12px;
+}
+.chart-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+.chart-subtitle {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-top: 3px;
+}
+.chart-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.tag-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(0,194,168,0.2); }
+.tag-blue { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(59,130,246,0.2); }
+.tag-amber { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,158,11,0.2); }
+
+.chart-wrap {
+  position: relative;
+  height: 220px;
+}
+
+/* ── LEGEND ── */
+.legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-mid);
+}
+.legend-dot {
+  width: 8px; height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── DONUT CENTER ── */
+.donut-wrap {
+  position: relative;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.donut-center {
+  position: absolute;
+  text-align: center;
+  pointer-events: none;
+}
+.donut-center-val {
+  font-family: 'Space Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--teal);
+  line-height: 1;
+}
+.donut-center-lbl {
+  font-size: 9px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+/* ── TABLE ── */
+.table-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.table-card.visible { opacity: 1; transform: translateY(0); }
+
+.table-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+thead th {
+  padding: 10px 20px;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+}
+tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: rgba(255,255,255,0.02); }
+tbody td {
+  padding: 12px 20px;
+  font-size: 13px;
+  color: var(--text);
+}
+.td-mono {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+}
+.td-mid { color: var(--text-mid); }
+
+.priority-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 20px;
+}
+.p-critical { background: rgba(239,68,68,0.12); color: #EF4444; }
+.p-high { background: rgba(245,158,11,0.12); color: #F59E0B; }
+.p-medium { background: rgba(59,130,246,0.12); color: #3B82F6; }
+.p-low { background: rgba(16,185,129,0.12); color: #10B981; }
+
+.progress-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.progress-track {
+  flex: 1;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  min-width: 80px;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+.progress-val {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--text-mid);
+  white-space: nowrap;
+}
+
+/* ── FOOTER ── */
+.dash-footer {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-brand {
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.footer-brand span { color: var(--teal); }
+.footer-meta {
+  font-size: 10px;
+  color: var(--text-dim);
+  font-family: 'Space Mono', monospace;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .chart-grid-2, .chart-grid-2b { grid-template-columns: 1fr; }
+  main { padding: 16px; }
+}
+@media (max-width: 600px) {
+  .kpi-grid { grid-template-columns: 1fr 1fr; }
+  .subbar { flex-wrap: wrap; height: auto; padding: 10px 16px; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <div class="logo">
+    <div class="logo-mark">TF</div>
+    <div>
+      <div class="logo-text">TechFlow Solutions</div>
+      <div class="logo-sub">Operations & Efficiency</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <div class="last-updated">Actualizado: hoy, 09:14</div>
+    <div class="live-dot-wrap">
+      <div class="live-dot"></div>
+      En vivo
+    </div>
+  </div>
+</nav>
+
+<!-- SUBBAR -->
+<div class="subbar">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span class="filter-label">Período</span>
+    <div class="filter-tabs">
+      <button class="tab" onclick="setFilter('Q1')">Q1</button>
+      <button class="tab" onclick="setFilter('Q2')">Q2</button>
+      <button class="tab" onclick="setFilter('Q3')">Q3</button>
+      <button class="tab" onclick="setFilter('Q4')">Q4</button>
+      <button class="tab active" onclick="setFilter('ALL')">Año completo</button>
+    </div>
+  </div>
+  <div class="subbar-meta" id="subbarMeta">Ene – Dic 2024 · 12 meses</div>
+</div>
+
+<main>
+
+  <!-- KPI CARDS -->
+  <div class="section-header">
+    <span class="section-title">Indicadores clave</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card c-teal" id="k1">
+      <div class="kpi-icon-row">
+        <div class="kpi-icon">⚡</div>
+        <span class="kpi-badge badge-up" id="k1-badge">↑ +12.3%</span>
+      </div>
+      <div class="kpi-value" id="k1-val">78.4%</div>
+      <div class="kpi-label">Eficiencia Operacional</div>
+      <div class="kpi-sub" id="k1-sub">vs. 61.2% al inicio del período</div>
+    </div>
+    <div class="kpi-card c-blue" id="k2">
+      <div class="kpi-icon-row">
+        <div class="kpi-icon">⏱</div>
+        <span class="kpi-badge badge-up" id="k2-badge">↓ −48.1%</span>
+      </div>
+      <div class="kpi-value" id="k2-val">4.2h</div>
+      <div class="kpi-label">Tiempo Medio de Resolución</div>
+      <div class="kpi-sub" id="k2-sub">vs. 8.1h al inicio del período</div>
+    </div>
+    <div class="kpi-card c-amber" id="k3">
+      <div class="kpi-icon-row">
+        <div class="kpi-icon">✓</div>
+        <span class="kpi-badge badge-up" id="k3-badge">↑ +6.1pp</span>
+      </div>
+      <div class="kpi-value" id="k3-val">91.3%</div>
+      <div class="kpi-label">Cumplimiento SLA</div>
+      <div class="kpi-sub" id="k3-sub">Objetivo: 90% · Superado</div>
+    </div>
+    <div class="kpi-card c-green" id="k4">
+      <div class="kpi-icon-row">
+        <div class="kpi-icon">🤖</div>
+        <span class="kpi-badge badge-up" id="k4-badge">↑ +139%</span>
+      </div>
+      <div class="kpi-value" id="k4-val">67%</div>
+      <div class="kpi-label">Tasa de Automatización</div>
+      <div class="kpi-sub" id="k4-sub">1.240 tareas/mes eliminadas</div>
+    </div>
+  </div>
+
+  <!-- TREND + DONUT -->
+  <div class="section-header">
+    <span class="section-title">Tendencias</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="chart-grid-2">
+    <div class="chart-card" id="cc1">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Evolución de Eficiencia Operacional</div>
+          <div class="chart-subtitle">Tiempo de resolución vs. tasa de automatización</div>
+        </div>
+        <span class="chart-tag tag-teal">Tendencia 2024</span>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="trendChart"></canvas>
+      </div>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div>Automatización (%)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>T. Resolución (h)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div>Cumplimiento SLA (%)</div>
+      </div>
+    </div>
+
+    <div class="chart-card" id="cc2">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Distribución de Tareas</div>
+          <div class="chart-subtitle">Manual · Semi-auto · Automatizado</div>
+        </div>
+        <span class="chart-tag tag-blue">Dic 2024</span>
+      </div>
+      <div class="donut-wrap">
+        <canvas id="donutChart"></canvas>
+        <div class="donut-center">
+          <div class="donut-center-val">67%</div>
+          <div class="donut-center-lbl">Automatizado</div>
+        </div>
+      </div>
+      <div class="legend" style="justify-content:center;">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--teal)"></div>Automatizado 67%</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div>Semi-auto 18%</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--border-light)"></div>Manual 15%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BAR + STACKED -->
+  <div class="chart-grid-2b">
+    <div class="chart-card" id="cc3">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Tiempo de Resolución por Proceso</div>
+          <div class="chart-subtitle">Promedio en horas · Ordenado por oportunidad</div>
+        </div>
+        <span class="chart-tag tag-amber">Por proceso</span>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card" id="cc4">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Utilización del Equipo por Trimestre</div>
+          <div class="chart-subtitle">Operaciones · Soporte · Automatización</div>
+        </div>
+        <span class="chart-tag tag-teal">Por equipo</span>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="stackedChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="section-header">
+    <span class="section-title">Oportunidades de optimización</span>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="table-card" id="tableCard">
+    <div class="table-header">
+      <div>
+        <div class="chart-title">Procesos con mayor potencial de mejora</div>
+        <div class="chart-subtitle">Ordenado por tiempo de resolución · Período seleccionado</div>
+      </div>
+      <span class="chart-tag tag-amber">6 procesos</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Proceso</th>
+          <th>T. Resolución</th>
+          <th>Cumplimiento SLA</th>
+          <th>Potencial ahorro</th>
+          <th>Prioridad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Integraciones técnicas</strong></td>
+          <td class="td-mono">12.1h</td>
+          <td>
+            <div class="progress-bar-wrap">
+              <div class="progress-track"><div class="progress-fill" style="width:76%;background:var(--red)"></div></div>
+              <span class="progress-val">76%</span>
+            </div>
+          </td>
+          <td class="td-mono" style="color:var(--green)">−38h/sem</td>
+          <td><span class="priority-badge p-critical">● Crítico</span></td>
+        </tr>
+        <tr>
+          <td><strong>Soporte técnico</strong></td>
+          <td class="td-mono">8.4h</td>
+          <td>
+            <div class="progress-bar-wrap">
+              <div class="progress-track"><div class="progress-fill" style="width:88%;background:var(--amber)"></div></div>
+              <span class="progress-val">88%</span>
+            </div>
+          </td>
+          <td class="td-mono" style="color:var(--green)">−22h/sem</td>
+          <td><span class="priority-badge p-high">● Alto</span></td>
+        </tr>
+        <tr>
+          <td><strong>Onboarding clientes</strong></td>
+          <td class="td-mono">6.2h</td>
+          <td>
+            <div class="progress-bar-wrap">
+              <div class="progress-track"><div class="progress-fill" style="width:85%;background:var(--amber)"></div></div>
+              <span class="progress-val">85%</span>
+            </div>
+          </td>
+          <td class="td-mono" style="color:var(--green)">−15h/sem</td>
+          <td><span class="priority-badge p-high">● Alto</span></td>
+        </tr>
+        <tr>
+          <td><strong>Gestión de cuentas</strong></td>
+          <td class="td-mono">3.8h</td>
+          <td>
+            <div class="progress-bar-wrap">
+              <div class="progress-track"><div class="progress-fill" style="width:93%;background:var(--blue)"></div></div>
+              <span class="progress-val">93%</span>
+            </div>
+          </td>
+          <td class="td-mono" style="color:var(--green)">−8h/sem</td>
+          <td><span class="priority-badge p-medium">● Medio</span></td>
+        </tr>
+        <tr>
+          <td><strong>Facturación</strong></td>
+          <td class="td-mono">2.1h</td>
+          <td>
+            <div class="progress-bar-wrap">
+              <div class="progress-track"><div class="progress-fill" style="width:97%;background:var(--green)"></div></div>
+              <span class="progress-val">97%</span>
+            </div>
+          </td>
+          <td class="td-mono" style="color:var(--text-mid)">−3h/sem</td>
+          <td><span class="priority-badge p-low">● Bajo</span></td>
+        </tr>
+        <tr>
+          <td><strong>Reporting</strong></td>
+          <td class="td-mono">1.4h</td>
+          <td>
+            <div class="progress-bar-wrap">
+              <div class="progress-track"><div class="progress-fill" style="width:99%;background:var(--green)"></div></div>
+              <span class="progress-val">99%</span>
+            </div>
+          </td>
+          <td class="td-mono" style="color:var(--text-mid)">−1h/sem</td>
+          <td><span class="priority-badge p-low">● Bajo</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="dash-footer">
+    <div class="footer-brand">
+      Diseñado por <span>Brenda Fabri</span> · Senior BA & AI Automation Consultant · <span>ATNIA</span>
+    </div>
+    <div class="footer-meta">TechFlow Solutions · Datos 2024 · v1.0</div>
+  </div>
+
+</main>
+
+<script>
+// ── DATA ──
+const DATA = {
+  ALL: {
+    months: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+    resolution: [8.1,7.8,7.2,6.9,6.5,5.8,5.2,4.9,4.5,4.2,4.0,4.2],
+    automation: [28,31,35,38,42,48,52,55,59,63,65,67],
+    sla: [89,87,90,91,88,92,94,93,91,95,92,96],
+    kpi: { eff:'78.4%', res:'4.2h', sla:'91.3%', auto:'67%',
+           effSub:'vs. 61.2% al inicio', resSub:'vs. 8.1h al inicio',
+           slaSub:'Objetivo: 90% · Superado', autoSub:'1.240 tareas/mes eliminadas',
+           effBadge:'↑ +12.3%', resBadge:'↓ −48.1%', slaBadge:'↑ +6.1pp', autoBadge:'↑ +139%' },
+    meta: 'Ene – Dic 2024 · 12 meses'
+  },
+  Q1: {
+    months: ['Ene','Feb','Mar'],
+    resolution: [8.1,7.8,7.2],
+    automation: [28,31,35],
+    sla: [89,87,90],
+    kpi: { eff:'62.4%', res:'7.7h', sla:'88.7%', auto:'31%',
+           effSub:'Inicio del período de mejora', resSub:'Punto de partida operacional',
+           slaSub:'Objetivo: 90% · En progreso', autoSub:'580 tareas/mes eliminadas',
+           effBadge:'↑ Baseline', resBadge:'↓ Inicial', slaBadge:'↓ −1.3pp', autoBadge:'↑ Inicial' },
+    meta: 'Ene – Mar 2024 · Q1'
+  },
+  Q2: {
+    months: ['Abr','May','Jun'],
+    resolution: [6.9,6.5,5.8],
+    automation: [38,42,48],
+    sla: [91,88,92],
+    kpi: { eff:'71.2%', res:'6.4h', sla:'90.3%', auto:'43%',
+           effSub:'vs. 62.4% en Q1', resSub:'vs. 7.7h en Q1',
+           slaSub:'Objetivo 90% · Alcanzado', autoSub:'890 tareas/mes eliminadas',
+           effBadge:'↑ +8.8%', resBadge:'↓ −16.9%', slaBadge:'↑ +1.6pp', autoBadge:'↑ +38.7%' },
+    meta: 'Abr – Jun 2024 · Q2'
+  },
+  Q3: {
+    months: ['Jul','Ago','Sep'],
+    resolution: [5.2,4.9,4.5],
+    automation: [52,55,59],
+    sla: [94,93,91],
+    kpi: { eff:'75.8%', res:'4.9h', sla:'92.7%', auto:'55%',
+           effSub:'vs. 71.2% en Q2', resSub:'vs. 6.4h en Q2',
+           slaSub:'Objetivo 90% · Superado', autoSub:'1.100 tareas/mes eliminadas',
+           effBadge:'↑ +4.6%', resBadge:'↓ −23.4%', slaBadge:'↑ +2.4pp', autoBadge:'↑ +27.9%' },
+    meta: 'Jul – Sep 2024 · Q3'
+  },
+  Q4: {
+    months: ['Oct','Nov','Dic'],
+    resolution: [4.2,4.0,4.2],
+    automation: [63,65,67],
+    sla: [95,92,96],
+    kpi: { eff:'78.4%', res:'4.1h', sla:'94.3%', auto:'65%',
+           effSub:'vs. 75.8% en Q3', resSub:'vs. 4.9h en Q3',
+           slaSub:'Mejor trimestre del año', autoSub:'1.240 tareas/mes eliminadas',
+           effBadge:'↑ +2.6%', resBadge:'↓ −16.3%', slaBadge:'↑ +1.6pp', autoBadge:'↑ +18.2%' },
+    meta: 'Oct – Dic 2024 · Q4'
+  }
+};
+
+let currentFilter = 'ALL';
+
+// ── CHART DEFAULTS ──
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.color = '#4B6080';
+
+const gridColor = 'rgba(30,45,69,0.6)';
+const baseOptions = {
+  responsive: true, maintainAspectRatio: false,
+  plugins: { legend: { display: false }, tooltip: {
+    backgroundColor: '#0D1220', borderColor: '#1E2D45', borderWidth: 1,
+    titleColor: '#E2E8F0', bodyColor: '#94A3B8',
+    padding: 10, cornerRadius: 8, displayColors: true,
+    callbacks: {}
+  }},
+  scales: {
+    x: { grid: { color: gridColor, drawBorder: false }, ticks: { font: { size: 10 } } },
+    y: { grid: { color: gridColor, drawBorder: false }, ticks: { font: { size: 10 } }, beginAtZero: false }
+  }
+};
+
+// ── TREND CHART ──
+const trendCtx = document.getElementById('trendChart').getContext('2d');
+const trendChart = new Chart(trendCtx, {
+  type: 'line',
+  data: {
+    labels: DATA.ALL.months,
+    datasets: [
+      {
+        label: 'Automatización (%)',
+        data: DATA.ALL.automation,
+        borderColor: '#00C2A8', backgroundColor: 'rgba(0,194,168,0.08)',
+        borderWidth: 2.5, tension: 0.4, fill: true, pointRadius: 3,
+        pointBackgroundColor: '#00C2A8', yAxisID: 'y'
+      },
+      {
+        label: 'T. Resolución (h)',
+        data: DATA.ALL.resolution,
+        borderColor: '#3B82F6', backgroundColor: 'transparent',
+        borderWidth: 2, tension: 0.4, fill: false, pointRadius: 3,
+        pointBackgroundColor: '#3B82F6', borderDash: [5,3], yAxisID: 'y2'
+      },
+      {
+        label: 'SLA (%)',
+        data: DATA.ALL.sla,
+        borderColor: '#F59E0B', backgroundColor: 'transparent',
+        borderWidth: 1.5, tension: 0.4, fill: false, pointRadius: 2,
+        pointBackgroundColor: '#F59E0B', borderDash: [3,3], yAxisID: 'y'
+      }
+    ]
+  },
+  options: {
+    ...baseOptions,
+    scales: {
+      x: { grid: { color: gridColor }, ticks: { font: { size: 10 } } },
+      y: {
+        position: 'left', grid: { color: gridColor }, beginAtZero: false,
+        ticks: { font: { size: 10 }, callback: v => v + '%' }
+      },
+      y2: {
+        position: 'right', grid: { drawOnChartArea: false }, beginAtZero: false,
+        ticks: { font: { size: 10 }, callback: v => v + 'h' }
+      }
+    }
+  }
+});
+
+// ── DONUT CHART ──
+const donutCtx = document.getElementById('donutChart').getContext('2d');
+const donutChart = new Chart(donutCtx, {
+  type: 'doughnut',
+  data: {
+    labels: ['Automatizado', 'Semi-automatizado', 'Manual'],
+    datasets: [{
+      data: [67, 18, 15],
+      backgroundColor: ['#00C2A8', '#3B82F6', '#1E2D45'],
+      borderColor: '#0D1220', borderWidth: 3,
+      hoverOffset: 6
+    }]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    cutout: '72%',
+    plugins: {
+      legend: { display: false },
+      tooltip: { backgroundColor: '#0D1220', borderColor: '#1E2D45', borderWidth: 1,
+        titleColor: '#E2E8F0', bodyColor: '#94A3B8', padding: 10, cornerRadius: 8,
+        callbacks: { label: ctx => ` ${ctx.parsed}%` }
+      }
+    }
+  }
+});
+
+// ── BAR CHART ──
+const barCtx = document.getElementById('barChart').getContext('2d');
+const barChart = new Chart(barCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Integraciones','Soporte Téc.','Onboarding','Gest. Cuentas','Facturación','Reporting'],
+    datasets: [{
+      label: 'Horas promedio',
+      data: [12.1, 8.4, 6.2, 3.8, 2.1, 1.4],
+      backgroundColor: [
+        'rgba(239,68,68,0.7)','rgba(245,158,11,0.7)','rgba(245,158,11,0.5)',
+        'rgba(59,130,246,0.6)','rgba(16,185,129,0.6)','rgba(16,185,129,0.4)'
+      ],
+      borderColor: [
+        '#EF4444','#F59E0B','#F59E0B','#3B82F6','#10B981','#10B981'
+      ],
+      borderWidth: 1.5, borderRadius: 6, borderSkipped: false
+    }]
+  },
+  options: {
+    ...baseOptions,
+    indexAxis: 'y',
+    scales: {
+      x: { grid: { color: gridColor }, ticks: { font:{size:10}, callback: v => v+'h' }, beginAtZero: true },
+      y: { grid: { display: false }, ticks: { font: { size: 10 } } }
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.x}h promedio` },
+        backgroundColor: '#0D1220', borderColor: '#1E2D45', borderWidth: 1,
+        titleColor: '#E2E8F0', bodyColor: '#94A3B8', padding: 10, cornerRadius: 8 }
+    }
+  }
+});
+
+// ── STACKED CHART ──
+const stackedCtx = document.getElementById('stackedChart').getContext('2d');
+const stackedChart = new Chart(stackedCtx, {
+  type: 'bar',
+  data: {
+    labels: ['Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024'],
+    datasets: [
+      {
+        label: 'Equipo Operaciones',
+        data: [75, 85, 87, 90],
+        backgroundColor: 'rgba(0,194,168,0.75)',
+        borderColor: '#00C2A8', borderWidth: 1.5, borderRadius: 0
+      },
+      {
+        label: 'Equipo Soporte',
+        data: [68, 78, 85, 88],
+        backgroundColor: 'rgba(59,130,246,0.65)',
+        borderColor: '#3B82F6', borderWidth: 1.5, borderRadius: 0
+      },
+      {
+        label: 'Dev / Automatización',
+        data: [58, 72, 83, 88],
+        backgroundColor: 'rgba(245,158,11,0.6)',
+        borderColor: '#F59E0B', borderWidth: 1.5,
+        borderRadius: { topLeft: 6, topRight: 6 }
+      }
+    ]
+  },
+  options: {
+    ...baseOptions,
+    scales: {
+      x: { grid: { display: false }, ticks: { font:{size:10} }, stacked: false },
+      y: { grid: { color: gridColor }, ticks: { font:{size:10}, callback: v => v+'%' },
+           beginAtZero: true, max: 100 }
+    },
+    plugins: {
+      legend: {
+        display: true, position: 'bottom',
+        labels: { font: { size: 10 }, color: '#94A3B8', padding: 16,
+          usePointStyle: true, pointStyleWidth: 8 }
+      },
+      tooltip: { backgroundColor: '#0D1220', borderColor: '#1E2D45', borderWidth: 1,
+        titleColor: '#E2E8F0', bodyColor: '#94A3B8', padding: 10, cornerRadius: 8,
+        callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}%` }
+      }
+    }
+  }
+});
+
+// ── FILTER LOGIC ──
+function setFilter(f) {
+  currentFilter = f;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+
+  const d = DATA[f];
+  document.getElementById('subbarMeta').textContent = d.meta;
+
+  // Update KPIs
+  document.getElementById('k1-val').textContent = d.kpi.eff;
+  document.getElementById('k2-val').textContent = d.kpi.res;
+  document.getElementById('k3-val').textContent = d.kpi.sla;
+  document.getElementById('k4-val').textContent = d.kpi.auto;
+  document.getElementById('k1-sub').textContent = d.kpi.effSub;
+  document.getElementById('k2-sub').textContent = d.kpi.resSub;
+  document.getElementById('k3-sub').textContent = d.kpi.slaSub;
+  document.getElementById('k4-sub').textContent = d.kpi.autoSub;
+  document.getElementById('k1-badge').textContent = d.kpi.effBadge;
+  document.getElementById('k2-badge').textContent = d.kpi.resBadge;
+  document.getElementById('k3-badge').textContent = d.kpi.slaBadge;
+  document.getElementById('k4-badge').textContent = d.kpi.autoBadge;
+
+  // Update trend chart
+  trendChart.data.labels = d.months;
+  trendChart.data.datasets[0].data = d.automation;
+  trendChart.data.datasets[1].data = d.resolution;
+  trendChart.data.datasets[2].data = d.sla;
+  trendChart.update('active');
+}
+
+// ── ENTRANCE ANIMATIONS ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.kpi-card, .chart-card, .table-card').forEach(el => observer.observe(el));
+
+// Stagger KPI cards specifically
+document.querySelectorAll('.kpi-card').forEach((el, i) => {
+  setTimeout(() => el.classList.add('visible'), 150 + i * 100);
+});
+document.querySelectorAll('.chart-card').forEach((el, i) => {
+  setTimeout(() => el.classList.add('visible'), 500 + i * 120);
+});
+setTimeout(() => document.getElementById('tableCard').classList.add('visible'), 900);
+</script>
+</body>
+</html>
