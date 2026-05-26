@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aviso Festivos Proveedores — Power Automate Flow</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #07090F;
+  --surface: #0D1220;
+  --border: #1E2D45;
+  --teal: #00C2A8;
+  --teal-dim: rgba(0,194,168,0.1);
+  --blue: #3B82F6;
+  --blue-dim: rgba(59,130,246,0.1);
+  --purple: #8B5CF6;
+  --purple-dim: rgba(139,92,246,0.1);
+  --amber: #F59E0B;
+  --amber-dim: rgba(245,158,11,0.1);
+  --coral: #F97316;
+  --coral-dim: rgba(249,115,22,0.1);
+  --green: #10B981;
+  --green-dim: rgba(16,185,129,0.1);
+  --gray-dim: rgba(148,163,184,0.08);
+  --text: #E2E8F0;
+  --text-mid: #94A3B8;
+  --text-dim: #4B6080;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 600px;
+}
+.header-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--teal-dim);
+  border: 1px solid rgba(0,194,168,0.2);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--teal);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 2s ease infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+.header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+.header p {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+/* ── METRICS ROW ── */
+.metrics {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.metric {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 24px;
+  text-align: center;
+  min-width: 130px;
+}
+.metric-val {
+  font-family: 'Space Mono', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.metric-lbl { font-size: 11px; color: var(--text-dim); }
+.m-teal .metric-val { color: var(--teal); }
+.m-blue .metric-val { color: var(--blue); }
+.m-green .metric-val { color: var(--green); }
+.m-amber .metric-val { color: var(--amber); }
+
+/* ── FLOW DIAGRAM ── */
+.flow-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 640px;
+  width: 100%;
+}
+
+.flow-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.flow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  position: relative;
+}
+
+/* ── NODES ── */
+.node {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 10px;
+  padding: 14px 20px;
+  border: 1px solid;
+  position: relative;
+  cursor: default;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.node:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.node-title { font-size: 13px; font-weight: 600; margin-bottom: 3px; }
+.node-sub { font-size: 11px; opacity: 0.75; }
+
+.n-teal   { background: var(--teal-dim);   border-color: rgba(0,194,168,0.3);  }
+.n-teal   .node-title { color: var(--teal); }
+.n-teal   .node-sub   { color: var(--teal); }
+
+.n-blue   { background: var(--blue-dim);   border-color: rgba(59,130,246,0.3); }
+.n-blue   .node-title { color: var(--blue); }
+.n-blue   .node-sub   { color: var(--blue); }
+
+.n-purple { background: var(--purple-dim); border-color: rgba(139,92,246,0.3); }
+.n-purple .node-title { color: var(--purple); }
+.n-purple .node-sub   { color: var(--purple); }
+
+.n-amber  { background: var(--amber-dim);  border-color: rgba(245,158,11,0.3); }
+.n-amber  .node-title { color: var(--amber); }
+.n-amber  .node-sub   { color: var(--amber); }
+
+.n-coral  { background: var(--coral-dim);  border-color: rgba(249,115,22,0.3); }
+.n-coral  .node-title { color: var(--coral); }
+.n-coral  .node-sub   { color: var(--coral); }
+
+.n-green  { background: var(--green-dim);  border-color: rgba(16,185,129,0.3); }
+.n-green  .node-title { color: var(--green); }
+.n-green  .node-sub   { color: var(--green); }
+
+.n-gray   { background: var(--gray-dim);   border-color: var(--border); }
+.n-gray   .node-title { color: var(--text-mid); }
+.n-gray   .node-sub   { color: var(--text-dim); }
+
+/* ── ARROW ── */
+.arrow {
+  width: 2px;
+  height: 32px;
+  background: var(--border);
+  position: relative;
+  flex-shrink: 0;
+}
+.arrow::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--border);
+}
+
+/* ── BRANCH ROW ── */
+.branch-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  width: 100%;
+  max-width: 560px;
+  position: relative;
+  margin: 0;
+}
+
+.branch-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.branch-exit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 40px;
+  flex-shrink: 0;
+  width: 160px;
+}
+
+.branch-connector {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  max-width: 560px;
+  position: relative;
+}
+
+.horiz-line {
+  height: 2px;
+  background: var(--border);
+  flex: 1;
+  position: relative;
+}
+.horiz-line::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid var(--border);
+}
+
+.branch-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+  padding: 0 8px;
+  white-space: nowrap;
+}
+
+.exit-node {
+  border-radius: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  background: var(--gray-dim);
+  width: 150px;
+  flex-shrink: 0;
+}
+.exit-node .node-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-mid);
+  margin-bottom: 2px;
+}
+.exit-node .node-sub { font-size: 10px; color: var(--text-dim); }
+
+/* ── RESULT ── */
+.result-node {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 10px;
+  padding: 16px 20px;
+  background: var(--green-dim);
+  border: 1.5px solid rgba(16,185,129,0.4);
+  text-align: center;
+}
+.result-node .node-title { font-size: 14px; font-weight: 700; color: var(--green); margin-bottom: 4px; }
+.result-node .node-sub { font-size: 11px; color: rgba(16,185,129,0.7); }
+
+/* ── STACK BADGES ── */
+.stack {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 40px;
+}
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+  background: var(--surface);
+}
+
+/* ── FOOTER ── */
+.footer {
+  margin-top: 40px;
+  font-size: 11px;
+  color: var(--text-dim);
+  text-align: center;
+}
+.footer span { color: var(--teal); }
+
+/* ── ANIMATIONS ── */
+.node, .result-node, .exit-node, .metric {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeUp 0.4s ease forwards;
+}
+@keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+.node:nth-child(1)  { animation-delay: 0.1s; }
+.node:nth-child(2)  { animation-delay: 0.2s; }
+.node:nth-child(3)  { animation-delay: 0.3s; }
+.metric:nth-child(1) { animation-delay: 0.05s; }
+.metric:nth-child(2) { animation-delay: 0.15s; }
+.metric:nth-child(3) { animation-delay: 0.25s; }
+.metric:nth-child(4) { animation-delay: 0.35s; }
+
+@media (max-width: 580px) {
+  .branch-row { flex-direction: column; align-items: center; }
+  .branch-exit { padding-top: 0; width: 100%; max-width: 320px; }
+  .horiz-line { display: none; }
+  .metrics { gap: 10px; }
+  .metric { min-width: 110px; padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-tag">
+    <div class="dot"></div>
+    Power Automate · En producción
+  </div>
+  <h1>Aviso de Festivos a Proveedores</h1>
+  <p>Automatización end-to-end que detecta festivos en el calendario corporativo y notifica automáticamente a 500+ proveedores, sin intervención humana y sin duplicados.</p>
+</div>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metric m-teal">
+    <div class="metric-val">7.000+</div>
+    <div class="metric-lbl">emails/año</div>
+  </div>
+  <div class="metric m-green">
+    <div class="metric-val">350h</div>
+    <div class="metric-lbl">trabajo eliminado</div>
+  </div>
+  <div class="metric m-blue">
+    <div class="metric-val">500+</div>
+    <div class="metric-lbl">proveedores</div>
+  </div>
+  <div class="metric m-amber">
+    <div class="metric-val">0</div>
+    <div class="metric-lbl">duplicados</div>
+  </div>
+</div>
+
+<!-- FLOW DIAGRAM -->
+<div class="flow-wrap">
+  <div class="flow-title">Diagrama del flujo · Power Automate</div>
+  <div class="flow">
+
+    <!-- Step 1 -->
+    <div class="node n-teal" style="animation-delay:0.1s">
+      <div class="node-title">⚡ Ejecución diaria automática</div>
+      <div class="node-sub">Recurrence trigger · Power Automate</div>
+    </div>
+    <div class="arrow"></div>
+
+    <!-- Step 2 -->
+    <div class="node n-blue" style="animation-delay:0.2s">
+      <div class="node-title">📅 Consulta Festivos Empresa</div>
+      <div class="node-sub">Outlook Calendar V3 · utcNow()</div>
+    </div>
+    <div class="arrow"></div>
+
+    <!-- Step 3 -->
+    <div class="node n-purple" style="animation-delay:0.3s">
+      <div class="node-title">🔍 Filtra: próximos 5 días</div>
+      <div class="node-sub">Filtrar matriz · addDays(utcNow, 5)</div>
+    </div>
+    <div class="arrow"></div>
+
+    <!-- Condition 1 + False branch -->
+    <div class="node n-amber" style="max-width:320px;animation-delay:0.4s">
+      <div class="node-title">⚖️ ¿Hay festivos en 5 días?</div>
+      <div class="node-sub">Condición · Aplicar a cada uno</div>
+    </div>
+
+    <div style="display:flex;width:100%;max-width:500px;align-items:flex-start;gap:0;">
+      <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+        <div style="display:flex;align-items:center;gap:6px;margin:8px 0 4px;">
+          <div style="width:2px;height:20px;background:var(--border);"></div>
+          <span style="font-size:11px;font-weight:600;color:var(--text-dim);">Sí</span>
+        </div>
+        <div class="arrow" style="height:16px;"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;padding-top:8px;width:180px;">
+        <div style="display:flex;align-items:center;gap:0;">
+          <span style="font-size:11px;font-weight:600;color:var(--text-dim);padding:0 6px;">No</span>
+          <div style="height:2px;width:40px;background:var(--border);position:relative;">
+            <div style="position:absolute;right:-5px;top:-4px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid var(--border);"></div>
+          </div>
+        </div>
+        <div class="exit-node" style="margin-top:8px;animation-delay:0.45s">
+          <div class="node-title">Sin festivos</div>
+          <div class="node-sub">Fin del flujo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="node n-blue" style="animation-delay:0.5s">
+      <div class="node-title">📊 Lee PROVEEDORES.xlsx</div>
+      <div class="node-sub">500+ contactos · SharePoint</div>
+    </div>
+    <div class="arrow"></div>
+
+    <!-- Condition 2 + True branch -->
+    <div class="node n-amber" style="max-width:320px;animation-delay:0.6s">
+      <div class="node-title">⚖️ ¿Ya fue notificado?</div>
+      <div class="node-sub">Verifica log de envíos · Condición 1</div>
+    </div>
+
+    <div style="display:flex;width:100%;max-width:500px;align-items:flex-start;gap:0;">
+      <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+        <div style="display:flex;align-items:center;gap:6px;margin:8px 0 4px;">
+          <div style="width:2px;height:20px;background:var(--border);"></div>
+          <span style="font-size:11px;font-weight:600;color:var(--text-dim);">No</span>
+        </div>
+        <div class="arrow" style="height:16px;"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;padding-top:8px;width:180px;">
+        <div style="display:flex;align-items:center;gap:0;">
+          <span style="font-size:11px;font-weight:600;color:var(--text-dim);padding:0 6px;">Sí</span>
+          <div style="height:2px;width:40px;background:var(--border);position:relative;">
+            <div style="position:absolute;right:-5px;top:-4px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid var(--border);"></div>
+          </div>
+        </div>
+        <div class="exit-node" style="margin-top:8px;animation-delay:0.65s">
+          <div class="node-title">Ya notificado</div>
+          <div class="node-sub">Omite proveedor</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="node n-coral" style="animation-delay:0.7s">
+      <div class="node-title">✉️ Envía email personalizado</div>
+      <div class="node-sub">Firma corporativa · fechas · log automático</div>
+    </div>
+    <div class="arrow"></div>
+
+    <!-- Result -->
+    <div class="result-node" style="animation-delay:0.8s">
+      <div class="node-title">7.000+ emails/año automáticos</div>
+      <div class="node-sub">350h de trabajo manual eliminadas · 0 duplicados</div>
+    </div>
+
+  </div>
+
+  <!-- STACK BADGES -->
+  <div class="stack">
+    <span class="badge">Power Automate</span>
+    <span class="badge">Outlook Calendar</span>
+    <span class="badge">SharePoint</span>
+    <span class="badge">Excel</span>
+    <span class="badge">Lógica condicional</span>
+    <span class="badge">Deduplicación</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Diseñado por <span>Brenda Fabri</span> · Senior BA &amp; AI Automation Consultant · <span>ATNIA</span>
+</div>
+
+</body>
+</html>
