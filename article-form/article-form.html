@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<!--
+  FORMULARIO DE ALTA DE ARTÍCULOS — Google Apps Script Web App
+  Author: Brenda Fabri · Senior BA & AI Automation Consultant · ATNIA
+  GitHub: github.com/brendafabri
+  
+  Web app embedded in Google Sheets for standardized article registration.
+  Loads fields dynamically from sheet configuration, validates required
+  fields, and saves directly to the article database.
+  
+  Stack: Google Apps Script · HTML · CSS · JavaScript · Google Sheets API
+-->
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      body {
+        font-family: 'Segoe UI', sans-serif;
+        padding: 10px;
+        background-color: #f1f3f4;
+      }
+      .contenedor-principal {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      #dinamico {
+        max-height: 300px;
+        overflow-y: auto;
+        padding-right: 10px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #eee;
+      }
+      .campo { margin-bottom: 12px; }
+      label {
+        display: block;
+        font-weight: bold;
+        color: #5f6368;
+        font-size: 11px;
+        margin-bottom: 4px;
+        text-transform: uppercase;
+      }
+
+      /* Required fields — red highlight */
+      .marcado-rojo label { color: #d93025; }
+      .marcado-rojo input,
+      .marcado-rojo select { border: 1.5px solid #d93025; background-color: #fff8f7; }
+      .asterisco { color: #d93025; font-size: 14px; font-weight: bold; }
+
+      input, select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #dadce0;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      .seccion-familia {
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #e8eaed;
+      }
+      #buscarFam {
+        border-color: #1a73e8;
+        margin-bottom: 5px;
+        background-color: #fff;
+      }
+
+      .botones { display: flex; gap: 10px; padding-top: 15px; }
+      button {
+        flex: 1;
+        padding: 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .btn-guardar { background-color: #1a73e8; color: white; }
+      .btn-limpiar {
+        background-color: #f1f3f4;
+        color: #3c4043;
+        border: 1px solid #dadce0;
+      }
+      #mensaje-exito {
+        display: none;
+        color: #0d652d;
+        background-color: #e6f4ea;
+        padding: 10px;
+        border-radius: 4px;
+        text-align: center;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contenedor-principal">
+      <div id="mensaje-exito">¡DATOS GUARDADOS CON ÉXITO!</div>
+      <div id="dinamico">Cargando campos...</div>
+
+      <!-- Family selector with live search -->
+      <div class="seccion-familia marcado-rojo" id="contFamilia">
+        <label>🔍 FAMILIA <span class="asterisco">*</span> (OBLIGATORIO)</label>
+        <input
+          type="text"
+          id="buscarFam"
+          placeholder="Filtrar familia..."
+          onkeyup="filtrarFamilias()"
+        >
+        <select id="selFamilia" size="5"></select>
+      </div>
+
+      <div class="botones">
+        <button class="btn-guardar" id="btnEnv" onclick="enviar()" disabled>
+          ESPERE...
+        </button>
+        <button class="btn-limpiar" onclick="limpiar()">LIMPIAR</button>
+      </div>
+    </div>
+
+    <script>
+      let todasLasFamilias = [];
+
+      // Fields highlighted in red (visually required)
+      const camposEnRojo = [
+        "DESCRIPCION PRINCIPAL",
+        "REFERENCIA PROVEEDOR/FABRICANTE",
+        "MARCA",
+        "REFERENCIA DEL PROVEEDOR"
+      ];
+
+      // Fields that actually block submission
+      const camposBloqueantes = ["DESCRIPCION"];
+
+      window.onload = () => {
+        google.script.run
+          .withSuccessHandler(res => {
+            const div = document.getElementById('dinamico');
+            div.innerHTML = "";
+
+            res.campos.forEach(col => {
+              const nombreLimpio = col.toUpperCase().trim();
+              const debeEstarRojo = camposEnRojo.includes(nombreLimpio);
+              const esObligatorio = camposBloqueantes.includes(nombreLimpio);
+
+              div.innerHTML += `
+                <div class="campo ${debeEstarRojo ? 'marcado-rojo' : ''}">
+                  <label>
+                    ${col}
+                    ${debeEstarRojo ? '<span class="asterisco">*</span>' : ''}
+                  </label>
+                  <input
+                    type="text"
+                    class="input-form"
+                    data-nombre="${nombreLimpio}"
+                    data-label="${col}"
+                    data-req="${esObligatorio}"
+                  >
+                </div>`;
+            });
+
+            todasLasFamilias = res.familias;
+            renderizarFamilias(todasLasFamilias);
+            document.getElementById('btnEnv').disabled = false;
+            document.getElementById('btnEnv').innerText = "GUARDAR DATOS";
+          })
+          .obtenerDatosIniciales();
+      };
+
+      function renderizarFamilias(lista) {
+        const sel = document.getElementById('selFamilia');
+        sel.innerHTML = "";
+        lista.forEach(f => {
+          const opt = document.createElement('option');
+          opt.value = f;
+          opt.text = f;
+          sel.appendChild(opt);
+        });
+      }
+
+      function filtrarFamilias() {
+        const texto = document.getElementById('buscarFam').value.toUpperCase();
+        renderizarFamilias(
+          todasLasFamilias.filter(f => f.toUpperCase().includes(texto))
+        );
+      }
+
+      function enviar() {
+        const inputs = document.querySelectorAll('.input-form');
+        const fam = document.getElementById('selFamilia').value;
+        const bloqueados = [];
+
+        inputs.forEach(i => {
+          if (i.getAttribute('data-req') === 'true' && !i.value.trim()) {
+            bloqueados.push(i.getAttribute('data-label'));
+          }
+        });
+
+        if (!fam) bloqueados.push("FAMILIA");
+
+        if (bloqueados.length > 0) {
+          alert(
+            "ERROR: Los siguientes campos son obligatorios para continuar:\n\n- " +
+            bloqueados.join("\n- ")
+          );
+          return;
+        }
+
+        const btn = document.getElementById('btnEnv');
+        btn.disabled = true;
+        btn.innerText = "GUARDANDO...";
+
+        const valores = Array.from(inputs).map(i => i.value);
+
+        google.script.run
+          .withSuccessHandler(() => {
+            document.getElementById('mensaje-exito').style.display = 'block';
+            setTimeout(() => {
+              document.getElementById('mensaje-exito').style.display = 'none';
+            }, 3000);
+            limpiar();
+            btn.disabled = false;
+            btn.innerText = "GUARDAR DATOS";
+          })
+          .guardarDatos(valores, fam);
+      }
+
+      function limpiar() {
+        document.querySelectorAll('.input-form').forEach(i => i.value = "");
+        document.getElementById('buscarFam').value = "";
+        renderizarFamilias(todasLasFamilias);
+      }
+    </script>
+  </body>
+</html>
