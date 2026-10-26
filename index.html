@@ -2,713 +2,677 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Brenda Fabri — Senior Business Analyst | Automation & AI Specialist. Barcelona.">
-<title>Brenda Fabri — Senior BA & AI Automation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Brenda Fabri — Process Optimization &amp; Automation</title>
+<meta name="description" content="Brenda Fabri — Process Optimization & Automation Specialist · Senior Business Analyst. Power Automate, Office Scripts, UiPath, Apps Script e IA aplicada. Barcelona.">
+<meta property="og:title" content="Brenda Fabri — Process Optimization & Automation">
+<meta property="og:description" content="Flujos de automatización en producción con métricas de impacto: Power Automate, Office Scripts, UiPath, Apps Script e IA aplicada.">
+<meta property="og:url" content="https://brendafabri.github.io/portfolio-projects/">
+<meta name="theme-color" content="#060810">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+/* Layout: split hero (pitch | live run of a real flow) → impact strip → timeline → filterable projects → stack → contact. Single dark look. */
 :root{
+  color-scheme:dark;
   --bg:#060810;--s1:#0C1120;--s2:#111826;--s3:#172038;
   --bd:#1E2E4A;--bd2:#283D60;
-  --teal:#00C9A8;--teal-d:rgba(0,201,168,.1);--teal-g:rgba(0,201,168,.22);
-  --gold:#F7C948;--gold-d:rgba(247,201,72,.1);
-  --blue:#4F90F5;--blue-d:rgba(79,144,245,.1);
-  --red:#FF5C5C;--red-d:rgba(255,92,92,.1);
-  --text:#DDE8F8;--mid:#6C80A8;--dim:#384E70;
-  --r:12px;--rr:8px
+  --teal:#00C9A8;--teal-d:rgba(0,201,168,.1);--teal-g:rgba(0,201,168,.25);
+  --gold:#F7C948;--gold-d:rgba(247,201,72,.12);
+  --blue:#4F90F5;--blue-d:rgba(79,144,245,.12);
+  --text:#DDE8F8;--mid:#8094BC;--dim:#4A6088;
+  --f-display:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'JetBrains Mono',ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+  --r:14px;
 }
+*,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scrollbar-color:var(--bd) var(--bg)}
-body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-
-/* BG GRID */
-body::before{
-  content:'';position:fixed;inset:0;
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-display);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.grid-bg{position:fixed;inset:0;pointer-events:none;z-index:0;
   background-image:linear-gradient(var(--bd) 1px,transparent 1px),linear-gradient(90deg,var(--bd) 1px,transparent 1px);
-  background-size:48px 48px;opacity:.18;pointer-events:none;z-index:0
-}
-body::after{
-  content:'';position:fixed;inset:0;
-  background:radial-gradient(ellipse 70% 50% at 15% 0%,rgba(0,201,168,.06) 0%,transparent 55%),
-             radial-gradient(ellipse 50% 40% at 85% 100%,rgba(247,201,72,.04) 0%,transparent 55%);
-  pointer-events:none;z-index:0
-}
+  background-size:48px 48px;opacity:.16;
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 15%,#000 30%,transparent 80%);
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 15%,#000 30%,transparent 80%)}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:6px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* ── NAV ── */
-nav{
-  position:sticky;top:0;z-index:200;
-  background:rgba(6,8,16,.88);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--bd);
-  padding:0 clamp(20px,5vw,60px);height:58px;
-  display:flex;align-items:center;justify-content:space-between
-}
-.nav-logo{
-  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;
-  color:var(--text);text-decoration:none;letter-spacing:-.3px
-}
-.nav-logo span{color:var(--teal)}
-.nav-links{display:flex;align-items:center;gap:6px}
-.nav-links a{
-  font-size:13px;font-weight:500;color:var(--mid);text-decoration:none;
-  padding:6px 12px;border-radius:6px;transition:all .15s
-}
-.nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
-.lang-btn{
-  font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
-  padding:5px 12px;border-radius:6px;border:1px solid var(--bd);
-  background:transparent;color:var(--mid);cursor:pointer;
-  transition:all .15s;letter-spacing:.04em
-}
-.lang-btn:hover{border-color:var(--teal);color:var(--teal)}
-.nav-right{display:flex;align-items:center;gap:10px}
+/* NAV */
+nav{position:sticky;top:0;z-index:20;background:rgba(6,8,16,.86);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd);padding-top:env(safe-area-inset-top,0px)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.logo{font-family:var(--f-mono);font-weight:700;font-size:14px;letter-spacing:.04em;text-decoration:none}
+.logo span{color:var(--teal)}
+.nav-links{display:flex;gap:24px;font-size:14px;color:var(--mid)}
+.nav-links a{text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.lang{font:500 12px/1 var(--f-mono);border:1px solid var(--bd2);border-radius:6px;padding:7px 10px;color:var(--mid);background:transparent;cursor:pointer}
+.lang b{color:var(--text);font-weight:700}
+.lang:hover{border-color:var(--teal)}
+@media (max-width:760px){.nav-links{display:none}}
 
-/* ── SECTIONS ── */
-section{position:relative;z-index:1;padding:80px clamp(20px,5vw,60px)}
-.section-tag{
-  display:inline-flex;align-items:center;gap:8px;
-  font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
-  color:var(--teal);letter-spacing:.14em;text-transform:uppercase;
-  margin-bottom:14px
-}
-.section-tag::before{content:'';width:20px;height:1px;background:var(--teal)}
-h2.sec-title{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-.5px;line-height:1.2;margin-bottom:10px}
-.sec-sub{font-size:15px;color:var(--mid);line-height:1.7;max-width:560px}
+/* HERO */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:56px;align-items:start;padding-block:72px 64px}
+@media (max-width:960px){.hero{grid-template-columns:minmax(0,1fr);gap:40px;padding-block:44px 48px}}
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:12px;color:var(--teal);background:var(--teal-d);border:1px solid var(--teal-g);border-radius:999px;padding:5px 12px}
+.status i{flex:none;width:7px;height:7px;border-radius:50%;background:var(--teal);animation:ping 2s infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(0,201,168,.55)}80%,100%{box-shadow:0 0 0 9px rgba(0,201,168,0)}}
+h1{font-size:clamp(44px,7vw,76px);line-height:.98;letter-spacing:-.03em;font-weight:800;margin:22px 0 14px;text-wrap:balance}
+.role{font-size:clamp(17px,2vw,20px);color:var(--mid);font-weight:500;margin:0 0 22px}
+.role b{color:var(--text);font-weight:600}
+.pitch{font-size:18px;max-width:34em;margin:0 0 10px}
+.pitch-sub{max-width:36em;color:var(--mid);margin:0 0 28px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 15px/1 var(--f-display);text-decoration:none;border-radius:10px;padding:13px 18px;border:1px solid var(--bd2);color:var(--text);background:var(--s1);cursor:pointer}
+.btn:hover{border-color:var(--teal)}
+.btn.primary{background:var(--teal);border-color:var(--teal);color:#04120F}
+.btn.primary:hover{filter:brightness(1.08)}
+.audience{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:36px;max-width:560px}
+@media (max-width:480px){.audience{grid-template-columns:minmax(0,1fr)}}
+.aud{border-top:1px solid var(--bd2);padding-top:12px}
+.aud h3{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 6px;font-weight:500}
+.aud p{margin:0;font-size:14px;color:var(--mid)}
 
-/* ── HERO ── */
-#hero{
-  min-height:calc(100vh - 58px);
-  display:flex;flex-direction:column;justify-content:center;
-  padding-top:40px;padding-bottom:60px;
-  max-width:1200px;margin:0 auto
-}
-.hero-available{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--teal-d);border:1px solid rgba(0,201,168,.28);
-  border-radius:20px;padding:5px 14px;
-  font-size:11px;font-weight:700;color:var(--teal);letter-spacing:.08em;
-  margin-bottom:24px
-}
-.hero-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s ease infinite}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 var(--teal-g)}50%{opacity:.7;box-shadow:0 0 0 5px transparent}}
+/* RUN PANEL */
+.run{background:linear-gradient(180deg,var(--s1),var(--bg));border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;box-shadow:0 30px 80px -40px rgba(0,201,168,.25)}
+.run-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-bottom:1px solid var(--bd);background:var(--s2)}
+.run-title{font-family:var(--f-mono);font-size:12px;color:var(--mid);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.run-title b{color:var(--text);font-weight:500}
+.run-state{font-family:var(--f-mono);font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid var(--teal-g);color:var(--teal);white-space:nowrap}
+.run-state.done{color:var(--gold);border-color:rgba(247,201,72,.35)}
+.tabs{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--bd);overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;font:500 13px/1 var(--f-display);color:var(--mid);background:transparent;border:1px solid var(--bd);border-radius:8px;padding:8px 11px;cursor:pointer}
+.tab:hover{color:var(--text)}
+.tab[aria-selected="true"]{color:var(--text);border-color:var(--teal);background:var(--teal-d)}
+.flow{list-style:none;margin:0;padding:18px 16px 6px;display:flex;flex-direction:column}
+.step{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:12px;align-items:center;position:relative;padding-bottom:16px}
+.step:last-child{padding-bottom:10px}
+.step:not(:last-child)::after{content:"";position:absolute;left:16px;top:34px;bottom:0;width:2px;background:var(--bd)}
+.pkt{position:absolute;left:13px;top:34px;width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px var(--teal);opacity:0;z-index:2}
+.step.flowing .pkt{animation:travel .55s ease-in forwards}
+@keyframes travel{0%{opacity:1;transform:translateY(0)}100%{opacity:1;transform:translateY(calc(var(--h,24px) - 4px))}}
+.node{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-family:var(--f-mono);font-size:10px;font-weight:700;background:var(--s3);border:1px solid var(--bd2);color:var(--mid);position:relative;z-index:1;transition:border-color .25s,box-shadow .25s}
+.step[data-kind="trigger"] .node{color:var(--gold)}
+.step[data-kind="script"] .node{color:var(--blue)}
+.step[data-kind="mail"] .node{color:var(--teal)}
+.step.running .node{border-color:var(--teal);box-shadow:0 0 0 4px var(--teal-d),0 0 18px rgba(0,201,168,.35)}
+.step.ok .node{border-color:rgba(0,201,168,.5)}
+.s-body{min-width:0}
+.s-conn{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.s-name{display:block;font-size:15px;font-weight:600;line-height:1.3}
+.s-meta{font-family:var(--f-mono);font-size:12px;color:var(--mid);text-align:right;white-space:nowrap}
+.step.ok .s-meta{color:var(--teal)}
+.step.wait .s-name{color:var(--mid)}
+.console{border-top:1px solid var(--bd);background:#04060C;font-family:var(--f-mono);font-size:12px;line-height:1.7;padding:12px 14px;height:150px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.console div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--mid)}
+.console .t{color:var(--dim)}
+.console .ok{color:var(--teal)}
+.console .sum{color:var(--gold)}
+.run-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:10px 14px;border-top:1px solid var(--bd);font-size:13px;color:var(--mid)}
+.run-foot b{color:var(--text);font-weight:600}
+.run-foot a{color:var(--teal);text-decoration:none}
+.run-foot a:hover{text-decoration:underline}
 
-.hero-name{
-  font-size:clamp(42px,7vw,80px);font-weight:800;
-  letter-spacing:-2px;line-height:1;
-  background:linear-gradient(135deg,#DDE8F8 0%,#8AAFD4 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  margin-bottom:8px
-}
-.hero-title{
-  font-size:clamp(18px,3vw,26px);font-weight:600;color:var(--mid);
-  letter-spacing:-.3px;margin-bottom:20px
-}
-.hero-title span{color:var(--teal)}
+/* IMPACT */
+.impact{position:relative;z-index:1;border-block:1px solid var(--bd);background:var(--s1)}
+.impact .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding-block:34px}
+@media (max-width:760px){.impact .wrap{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:26px}}
+.kpi{padding-inline:20px;border-left:1px solid var(--bd)}
+.kpi:first-child{border-left:0;padding-left:0}
+@media (max-width:760px){.kpi:nth-child(3){border-left:0;padding-left:0}}
+.kpi-val{font-family:var(--f-mono);font-size:clamp(28px,3.6vw,40px);font-weight:700;color:var(--teal);font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi-val small{font-size:.5em;color:var(--mid);font-weight:500;margin-left:4px}
+.kpi-lbl{font-size:14px;color:var(--mid);margin-top:6px}
+.kpi-src{font-family:var(--f-mono);font-size:11px;color:var(--dim);margin-top:4px;overflow-wrap:anywhere}
 
-.hero-tagline{
-  font-size:clamp(15px,2vw,18px);color:var(--mid);
-  line-height:1.75;max-width:580px;margin-bottom:36px;font-weight:400
-}
-.hero-tagline strong{color:var(--text);font-weight:600}
+/* SECTIONS */
+section.block{padding-block:84px 0}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin:0 0 10px}
+h2{font-size:clamp(30px,4vw,42px);letter-spacing:-.02em;line-height:1.1;margin:0 0 14px;text-wrap:balance}
+.lead{color:var(--mid);max-width:60ch;margin:0 0 36px}
 
-.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
-.btn-primary{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--teal);color:#000;
-  padding:12px 24px;border-radius:var(--rr);font-weight:700;font-size:14px;
-  text-decoration:none;transition:all .2s;border:none;cursor:pointer
+/* TIMELINE */
+.xp{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:56px;align-items:start}
+@media (max-width:960px){.xp{grid-template-columns:minmax(0,1fr);gap:40px}}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:132px 22px minmax(0,1fr);gap:18px;position:relative;padding-bottom:30px}
+.tl li:last-child{padding-bottom:0}
+.tl-date{font-family:var(--f-mono);font-size:13px;color:var(--mid);text-align:right;padding-top:3px}
+.tl-dot{position:relative;display:flex;justify-content:center}
+.tl-dot::before{content:"";width:12px;height:12px;border-radius:50%;border:2px solid var(--bd2);background:var(--bg);margin-top:6px;z-index:1}
+.tl li:not(:last-child) .tl-dot::after{content:"";position:absolute;top:20px;bottom:-30px;width:2px;background:var(--bd)}
+.tl li.now .tl-dot::before{border-color:var(--teal);background:var(--teal);box-shadow:0 0 0 5px var(--teal-d)}
+.tl-body h3{margin:0;font-size:19px;font-weight:600;line-height:1.3}
+.tl-co{color:var(--mid);font-size:15px;margin:2px 0 8px}
+.tl-body p{margin:0;color:var(--mid);max-width:60ch;font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.chip{font-family:var(--f-mono);font-size:11.5px;color:var(--text);border:1px solid var(--bd2);background:var(--s2);border-radius:6px;padding:3px 8px}
+@media (max-width:620px){
+  .tl li{grid-template-columns:22px minmax(0,1fr);gap:14px}
+  .tl-date{grid-column:2;grid-row:1;text-align:left;padding-top:0}
+  .tl-dot{grid-column:1;grid-row:1 / span 2}
+  .tl-body{grid-column:2}
 }
-.btn-primary:hover{background:#00e5be;transform:translateY(-1px);box-shadow:0 8px 24px var(--teal-g)}
-.btn-outline{
-  display:inline-flex;align-items:center;gap:8px;
-  background:transparent;color:var(--text);
-  padding:12px 24px;border-radius:var(--rr);font-weight:600;font-size:14px;
-  text-decoration:none;transition:all .2s;border:1px solid var(--bd)
-}
-.btn-outline:hover{border-color:var(--bd2);background:rgba(255,255,255,.04)}
+.side{display:grid;gap:28px}
+.side h3{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:500;margin:0 0 10px}
+.side ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.side li{font-size:15px}
+.side li span{display:block;color:var(--mid);font-size:13.5px}
+.langs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.lv{border:1px solid var(--bd);border-radius:10px;padding:10px 12px;background:var(--s1)}
+.lv b{display:block;font-size:14px;font-weight:600}
+.lv span{font-family:var(--f-mono);font-size:12px;color:var(--teal)}
+.cv-box{border:1px solid var(--bd2);border-radius:var(--r);padding:16px;background:var(--s1);display:grid;gap:10px}
+.cv-box p{margin:0;color:var(--mid);font-size:14px}
+.cv-box .row{display:flex;flex-wrap:wrap;gap:10px}
 
-.hero-stats{
-  display:flex;gap:clamp(24px,4vw,48px);flex-wrap:wrap
-}
-.stat{border-left:2px solid var(--bd);padding-left:18px}
-.stat-val{
-  font-family:'JetBrains Mono',monospace;font-size:clamp(22px,3vw,30px);
-  font-weight:700;color:var(--teal);line-height:1;margin-bottom:4px
-}
-.stat-lbl{font-size:12px;color:var(--dim);font-weight:500}
+/* PROJECTS */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.filt{font:500 14px/1 var(--f-display);color:var(--mid);background:transparent;border:1px solid var(--bd);border-radius:999px;padding:9px 14px;cursor:pointer;display:inline-flex;gap:8px;align-items:center}
+.filt:hover{color:var(--text)}
+.filt .n{font-family:var(--f-mono);font-size:11px;color:var(--dim)}
+.filt[aria-pressed="true"]{color:var(--text);border-color:var(--teal);background:var(--teal-d)}
+.filt[aria-pressed="true"] .n{color:var(--teal)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:1000px){.proj-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.proj-grid{grid-template-columns:minmax(0,1fr)}}
+.card{display:flex;flex-direction:column;gap:12px;background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:20px;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--bd2);transform:translateY(-2px)}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.cat{padding:4px 8px;border-radius:6px;border:1px solid}
+.cat.auto{color:var(--teal);border-color:var(--teal-g);background:var(--teal-d)}
+.cat.bi{color:var(--blue);border-color:rgba(79,144,245,.3);background:var(--blue-d)}
+.cat.demo{color:var(--gold);border-color:rgba(247,201,72,.3);background:var(--gold-d)}
+.cat.doc{color:var(--mid);border-color:var(--bd2);background:var(--s2)}
+.org{color:var(--dim);text-align:right;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.card h3{margin:0;font-size:19px;line-height:1.25;font-weight:600;text-wrap:balance}
+.card p{margin:0;color:var(--mid);font-size:14.5px}
+.metrics{display:flex;flex-wrap:wrap;gap:6px 14px;font-family:var(--f-mono);font-size:12px;color:var(--teal);border-top:1px dashed var(--bd2);padding-top:12px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12px;color:var(--mid);border:1px solid var(--bd);border-radius:6px;padding:3px 8px}
+.card-link{margin-top:auto;padding-top:4px;font-size:14px;font-weight:600}
+.card-link a{color:var(--teal);text-decoration:none}
+.card-link a:hover{text-decoration:underline}
+.card-link span{color:var(--dim);font-weight:500}
 
-/* ── ABOUT ── */
-#about{background:var(--s1);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;max-width:1100px;margin:0 auto}
-.about-text p{font-size:15px;color:var(--mid);line-height:1.85;margin-bottom:16px}
-.about-text p strong{color:var(--text);font-weight:600}
-.roles{display:flex;flex-direction:column;gap:14px;margin-top:28px}
-.role-card{
-  background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);
-  padding:16px 18px;display:flex;align-items:flex-start;gap:14px
-}
-.role-icon{width:38px;height:38px;border-radius:var(--rr);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.role-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
-.role-company{font-size:12px;color:var(--mid)}
-.role-period{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--dim);margin-top:2px}
+/* STACK */
+.stack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media (max-width:900px){.stack{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.stack{grid-template-columns:minmax(0,1fr)}}
+.sg{border-top:1px solid var(--bd2);padding-top:14px}
+.sg h3{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:500;margin:0 0 10px}
+.sg .chips{margin-top:0}
+.chip.hi{border-color:var(--teal-g);color:var(--teal)}
 
-/* ── STACK ── */
-#stack{max-width:1100px;margin:0 auto}
-.stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:40px}
-.stack-group{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:18px}
-.stack-group-title{
-  font-size:10px;font-weight:700;color:var(--dim);
-  text-transform:uppercase;letter-spacing:.12em;margin-bottom:14px
-}
-.stack-items{display:flex;flex-direction:column;gap:8px}
-.stack-item{
-  display:flex;align-items:center;gap:10px;
-  font-size:13px;font-weight:500;color:var(--mid)
-}
-.stack-item::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);flex-shrink:0}
-.stack-item.highlight{color:var(--text)}
-.stack-item.highlight::before{background:var(--gold)}
+/* CONTACT */
+.contact{margin-top:84px;border-top:1px solid var(--bd);background:var(--s1);position:relative;z-index:1}
+.contact .wrap{padding-block:72px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+@media (max-width:860px){.contact .wrap{grid-template-columns:minmax(0,1fr);gap:28px}}
+.links{display:grid;gap:10px}
+.link{display:flex;align-items:center;justify-content:space-between;gap:12px;text-decoration:none;border:1px solid var(--bd2);border-radius:10px;padding:14px 16px;background:var(--bg)}
+.link:hover{border-color:var(--teal)}
+.link b{font-weight:600}
+.link span{font-family:var(--f-mono);font-size:12.5px;color:var(--mid);overflow-wrap:anywhere;text-align:right}
+footer{position:relative;z-index:1;border-top:1px solid var(--bd)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding-block:22px calc(22px + env(safe-area-inset-bottom,0px));font-size:13px;color:var(--dim)}
+footer .mono{font-family:var(--f-mono);font-size:12px}
 
-/* ── PROJECTS ── */
-#projects{background:var(--s1);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
-.proj-header{max-width:1100px;margin:0 auto 40px}
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px;max-width:1100px;margin:0 auto}
-.proj-card{
-  background:var(--s2);border:1px solid var(--bd);border-radius:var(--r);
-  padding:22px;position:relative;overflow:hidden;
-  transition:border-color .2s,transform .2s,box-shadow .2s;
-  display:flex;flex-direction:column
-}
-.proj-card:hover{border-color:var(--bd2);transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,.4)}
-.proj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
-.proj-card.c-teal::before{background:linear-gradient(90deg,var(--teal),transparent)}
-.proj-card.c-gold::before{background:linear-gradient(90deg,var(--gold),transparent)}
-.proj-card.c-blue::before{background:linear-gradient(90deg,var(--blue),transparent)}
-.proj-card.c-red::before{background:linear-gradient(90deg,var(--red),transparent)}
-
-.proj-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
-.proj-icon{font-size:22px}
-.proj-type{
-  font-size:9px;font-weight:700;padding:3px 8px;border-radius:20px;
-  letter-spacing:.08em;text-transform:uppercase
-}
-.type-auto{background:var(--teal-d);color:var(--teal);border:1px solid rgba(0,201,168,.2)}
-.type-bi{background:var(--blue-d);color:var(--blue);border:1px solid rgba(79,144,245,.2)}
-.type-doc{background:var(--gold-d);color:var(--gold);border:1px solid rgba(247,201,72,.2)}
-.type-demo{background:rgba(255,92,92,.08);color:var(--red);border:1px solid rgba(255,92,92,.2)}
-
-.proj-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.3}
-.proj-desc{font-size:13px;color:var(--mid);line-height:1.7;flex:1;margin-bottom:16px}
-.proj-impact{
-  background:rgba(0,201,168,.06);border:1px solid rgba(0,201,168,.15);
-  border-radius:6px;padding:8px 12px;
-  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);
-  margin-bottom:16px;line-height:1.5
-}
-.proj-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
-.tag{
-  font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;
-  background:rgba(255,255,255,.05);color:var(--mid);border:1px solid var(--bd)
-}
-.proj-links{display:flex;gap:10px;margin-top:auto}
-.proj-link{
-  font-size:12px;font-weight:600;color:var(--mid);text-decoration:none;
-  display:flex;align-items:center;gap:5px;
-  padding:6px 12px;border-radius:6px;border:1px solid var(--bd);
-  transition:all .15s
-}
-.proj-link:hover{color:var(--teal);border-color:rgba(0,201,168,.35);background:var(--teal-d)}
-.proj-link.primary{background:var(--teal-d);color:var(--teal);border-color:rgba(0,201,168,.3)}
-.proj-link.primary:hover{background:rgba(0,201,168,.2)}
-
-/* ── CONTACT ── */
-#contact{max-width:700px;margin:0 auto;text-align:center}
-#contact .sec-sub{margin:0 auto 40px}
-.contact-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.contact-link{
-  display:flex;align-items:center;gap:10px;
-  background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);
-  padding:14px 22px;text-decoration:none;color:var(--mid);font-weight:600;
-  transition:all .2s;font-size:14px
-}
-.contact-link:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-d);transform:translateY(-1px)}
-.contact-link svg{flex-shrink:0}
-
-/* ── FOOTER ── */
-footer{
-  border-top:1px solid var(--bd);padding:24px clamp(20px,5vw,60px);
-  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
-  position:relative;z-index:1
-}
-footer p{font-size:12px;color:var(--dim)}
-footer a{color:var(--teal);text-decoration:none}
-
-/* ── ANIMATIONS ── */
-.fade-up{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
-.fade-up.visible{opacity:1;transform:translateY(0)}
-
-/* ── RESPONSIVE ── */
-@media(max-width:768px){
-  .about-grid{grid-template-columns:1fr;gap:32px}
-  .nav-links{display:none}
-  .hero-stats{gap:20px}
-  section{padding:60px clamp(16px,4vw,40px)}
-}
-@media(max-width:500px){
-  .proj-grid{grid-template-columns:1fr}
-  .contact-links{flex-direction:column;align-items:center}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition:none!important}
 }
 </style>
 </head>
 <body>
+<div class="grid-bg" aria-hidden="true"></div>
 
-<!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-logo">BF<span>.</span></a>
-  <div class="nav-links">
-    <a href="#about" data-i18n="nav.about">Sobre mí</a>
-    <a href="#stack" data-i18n="nav.stack">Stack</a>
-    <a href="#projects" data-i18n="nav.projects">Proyectos</a>
-    <a href="#contact" data-i18n="nav.contact">Contacto</a>
-  </div>
-  <div class="nav-right">
-    <button class="lang-btn" id="langBtn" onclick="toggleLang()">EN</button>
+  <div class="wrap">
+    <a class="logo" href="#top">BF<span>.</span>automation</a>
+    <div class="nav-links">
+      <a href="#impacto" data-i18n="nav.impact">Impacto</a>
+      <a href="#experiencia" data-i18n="nav.xp">Experiencia</a>
+      <a href="#proyectos" data-i18n="nav.projects">Proyectos</a>
+      <a href="#stack" data-i18n="nav.stack">Stack</a>
+      <a href="#contacto" data-i18n="nav.contact">Contacto</a>
+    </div>
+    <button class="lang" id="langBtn" type="button" aria-label="Cambiar idioma / Switch language"><b>ES</b> · EN</button>
   </div>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-available">
-    <span class="hero-dot"></span>
-    <span data-i18n="hero.available">Disponible para consultoría</span>
+<header class="wrap hero" id="top">
+  <div>
+    <span class="status"><i></i><span data-i18n="hero.status">Process Optimization &amp; Automation · Barcelona</span></span>
+    <h1>Brenda Fabri</h1>
+    <p class="role"><b>Process Optimization &amp; Automation Specialist</b> · Senior Business Analyst</p>
+    <p class="pitch" data-i18n="hero.pitch">Convierto procesos manuales en flujos que corren solos, con métricas de impacto medibles.</p>
+    <p class="pitch-sub" data-i18n="hero.sub">Más de 7 años entre análisis de negocio y automatización: Power Automate, Office Scripts, UiPath, Apps Script e IA aplicada. El panel reproduce flujos reales que tengo en producción.</p>
+    <div class="ctas">
+      <a class="btn primary cv-link" href="cv/CV_Brenda_Fabri_ES.pdf" target="_blank" rel="noopener" data-i18n="hero.cv">Descargar CV ↓</a>
+      <a class="btn" href="#contacto" data-i18n="hero.talk">Hablemos de un proyecto</a>
+    </div>
+    <div class="audience">
+      <div class="aud"><h3 data-i18n="aud.hire.t">Para equipos que contratan</h3><p data-i18n="aud.hire.p">Perfil BA + automatización en Microsoft 365 y Google Workspace, con experiencia en entornos multinacionales.</p></div>
+      <div class="aud"><h3 data-i18n="aud.biz.t">Para empresas · ATNIA</h3><p data-i18n="aud.biz.p">Diagnóstico y automatización end-to-end para pymes, con cumplimiento RGPD desde el diseño.</p></div>
+    </div>
   </div>
-  <h1 class="hero-name">Brenda Fabri</h1>
-  <div class="hero-title">
-    Senior Business Analyst <span>|</span> Automation & AI Specialist
+
+  <div class="run" role="region" aria-label="Ejecución simulada de un flujo de automatización">
+    <div class="run-head">
+      <div class="run-title">run <b id="runId">#0418</b> · <span id="runName">supplier-sustainability-assessments</span></div>
+      <span class="run-state" id="runState">completado</span>
+    </div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <ol class="flow" id="flow"></ol>
+    <div class="console" id="console" aria-hidden="true"></div>
+    <div class="run-foot"><span id="runResult"></span><a href="#proyectos" id="runLink" data-i18n="run.case">Ver proyecto →</a></div>
   </div>
-  <p class="hero-tagline" data-i18n="hero.tagline">
-    <strong>Convierto procesos en sistemas inteligentes que trabajan solos.</strong><br>
-    Analizo operaciones con lógica BA senior, diseño la automatización con IA y la implemento — sin que el cliente necesite un equipo técnico aparte.
-  </p>
-  <div class="hero-ctas">
-    <a href="#projects" class="btn-primary" data-i18n="hero.cta1">Ver proyectos →</a>
-    <a href="#contact" class="btn-outline" data-i18n="hero.cta2">Contactar</a>
-    <a href="https://atnia.es" target="_blank" class="btn-outline">ATNIA ↗</a>
+</header>
+
+<div class="impact" id="impacto">
+  <div class="wrap">
+    <div class="kpi"><div class="kpi-val" data-to="18000" data-suffix="+">18.000+</div><div class="kpi-lbl" data-i18n="kpi.1">emails clasificados sin intervención</div><div class="kpi-src">invoice-classifier</div></div>
+    <div class="kpi"><div class="kpi-val" data-to="350" data-unit="h">350<small>h</small></div><div class="kpi-lbl" data-i18n="kpi.2">de trabajo manual eliminadas al año</div><div class="kpi-src">aviso-festivos</div></div>
+    <div class="kpi"><div class="kpi-val" data-to="40000" data-prefix="~">~40.000</div><div class="kpi-lbl" data-i18n="kpi.3">filas procesadas por campaña de costes</div><div class="kpi-src">supplier-cost-request</div></div>
+    <div class="kpi"><div class="kpi-val" data-to="9" data-unit="d">9<small>d</small></div><div class="kpi-lbl" data-i18n="kpi.4">persona-días eliminados por ciclo</div><div class="kpi-src">sustainability-assessments</div></div>
   </div>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-val">7+</div><div class="stat-lbl" data-i18n="stat.years">años de experiencia</div></div>
-    <div class="stat"><div class="stat-val">18K+</div><div class="stat-lbl" data-i18n="stat.emails">emails automatizados</div></div>
-    <div class="stat"><div class="stat-val">56</div><div class="stat-lbl" data-i18n="stat.workers">trabajadores controlados</div></div>
-    <div class="stat"><div class="stat-val">350h</div><div class="stat-lbl" data-i18n="stat.saved">trabajo/año eliminadas</div></div>
+</div>
+
+<section class="wrap block" id="experiencia">
+  <p class="eyebrow" data-i18n="xp.tag">Experiencia</p>
+  <h2 data-i18n="xp.title">De operaciones a automatización</h2>
+  <p class="lead" data-i18n="xp.lead">Empecé optimizando procesos desde operaciones y administración. Hoy diseño y construyo las automatizaciones que los reemplazan.</p>
+  <div class="xp">
+    <ol class="tl">
+      <li class="now">
+        <div class="tl-date" data-i18n="xp.1.d">ago 2026 → hoy</div><div class="tl-dot"></div>
+        <div class="tl-body"><h3>Process Optimization &amp; Automation Specialist</h3><div class="tl-co">Lyreco · Barcelona</div>
+          <p data-i18n="xp.1.p">Automatización de procesos con proveedores usando conectores estándar de Microsoft 365: assessments de sostenibilidad, petición anual de costes y envío de documentación de compliance.</p>
+          <div class="chips"><span class="chip">Power Automate</span><span class="chip">Office Scripts</span><span class="chip">TypeScript</span><span class="chip">UiPath</span><span class="chip">SharePoint</span><span class="chip">Outlook</span></div></div>
+      </li>
+      <li class="now">
+        <div class="tl-date" data-i18n="xp.2.d">2024 → hoy</div><div class="tl-dot"></div>
+        <div class="tl-body"><h3 data-i18n="xp.2.t">Co-Fundadora y Consultora Principal</h3><div class="tl-co">ATNIA · Barcelona</div>
+          <p data-i18n="xp.2.p">Consultora de automatización con IA para empresas medianas que quieren escalar operaciones sin aumentar equipo, con cumplimiento RGPD desde el diseño.</p>
+          <div class="chips"><span class="chip">n8n</span><span class="chip">LLMs/RAG</span><span class="chip">APIs REST</span><span class="chip">WhatsApp API</span></div></div>
+      </li>
+      <li>
+        <div class="tl-date" data-i18n="xp.3.d">2025 → jun 2026</div><div class="tl-dot"></div>
+        <div class="tl-body"><h3>Business Analyst &amp; Process Automation Manager</h3><div class="tl-co">Diplonautic SL</div>
+          <p data-i18n="xp.3.p">Clasificador de facturas con OCR bilingüe, avisos de festivos a 500+ proveedores, control de horas de 56 personas, dashboards Power BI e integración de IA generativa.</p>
+          <div class="chips"><span class="chip">Apps Script</span><span class="chip">Power Automate</span><span class="chip">Power BI</span><span class="chip">LLMs/RAG</span></div></div>
+      </li>
+      <li>
+        <div class="tl-date">2017 → 2024</div><div class="tl-dot"></div>
+        <div class="tl-body"><h3>Business Analyst &amp; Operations Manager</h3><div class="tl-co">Planes de Ahorro · Yacopini Motors</div>
+          <p data-i18n="xp.4.p">Rediseño de procesos con un 75% menos de errores operativos, automatización Excel/VBA, KPIs para Volkswagen, Nissan y Chevrolet, y un equipo directo de 5+ personas.</p>
+          <div class="chips"><span class="chip">Excel/VBA</span><span class="chip">Dynamics 365</span><span class="chip">SIAC</span><span class="chip">KPIs</span></div></div>
+      </li>
+    </ol>
+    <aside class="side">
+      <div>
+        <h3 data-i18n="edu.t">Formación</h3>
+        <ul>
+          <li data-i18n="edu.1">Máster en Transformación Digital<span>Business School IOE · 2025</span></li>
+          <li data-i18n="edu.2">Licenciatura en Administración de Empresas<span>Universidad Nacional de Cuyo · 2016</span></li>
+          <li data-i18n="edu.3">Certificaciones<span>IA Generativa Aplicada · Data Analyst &amp; Power BI · SCRUM · JavaScript &amp; React</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 data-i18n="lang.t">Idiomas</h3>
+        <div class="langs">
+          <div class="lv"><b data-i18n="lang.es">Español</b><span data-i18n="lang.native">Nativo</span></div>
+          <div class="lv"><b data-i18n="lang.en">Inglés</b><span>C1</span></div>
+          <div class="lv"><b data-i18n="lang.it">Italiano</b><span>B2</span></div>
+          <div class="lv"><b data-i18n="lang.ca">Catalán</b><span>B1</span></div>
+        </div>
+      </div>
+      <div class="cv-box">
+        <p data-i18n="cv.p">CV completo en PDF, dos páginas.</p>
+        <div class="row">
+          <a class="btn primary" href="cv/CV_Brenda_Fabri_ES.pdf" target="_blank" rel="noopener">CV Español ↓</a>
+          <a class="btn" href="cv/CV_Brenda_Fabri_EN.pdf" target="_blank" rel="noopener">CV English ↓</a>
+        </div>
+      </div>
+    </aside>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="about-grid">
+<section class="wrap block" id="proyectos">
+  <p class="eyebrow" data-i18n="proj.tag">Proyectos</p>
+  <h2 data-i18n="proj.title">Proyectos reales en producción</h2>
+  <p class="lead" data-i18n="proj.lead">Automatizaciones, dashboards y herramientas construidas para resolver problemas de negocio reales, con métricas de impacto documentadas.</p>
+  <div class="filters" id="filters" role="group" aria-label="Filtrar proyectos"></div>
+  <div class="proj-grid" id="projGrid"></div>
+</section>
+
+<section class="wrap block" id="stack">
+  <p class="eyebrow" data-i18n="stack.tag">Stack técnico</p>
+  <h2 data-i18n="stack.title">Herramientas y tecnologías</h2>
+  <p class="lead" data-i18n="stack.lead">En verde, lo que uso a diario en producción.</p>
+  <div class="stack">
+    <div class="sg"><h3 data-i18n="stack.auto">Automatización</h3><div class="chips"><span class="chip hi">Power Automate</span><span class="chip hi">Office Scripts</span><span class="chip hi">UiPath</span><span class="chip hi">Google Apps Script</span><span class="chip">n8n</span><span class="chip">Make / Zapier</span></div></div>
+    <div class="sg"><h3>Microsoft 365</h3><div class="chips"><span class="chip hi">SharePoint</span><span class="chip hi">Outlook</span><span class="chip hi">Excel avanzado</span><span class="chip">Teams</span><span class="chip">OneDrive</span><span class="chip">Power Platform</span></div></div>
+    <div class="sg"><h3 data-i18n="stack.ai">IA y LLMs</h3><div class="chips"><span class="chip hi">LLMs / RAG</span><span class="chip">Prompt Engineering</span><span class="chip">OpenAI / Claude</span><span class="chip">OCR</span></div></div>
+    <div class="sg"><h3 data-i18n="stack.bi">Datos y BI</h3><div class="chips"><span class="chip hi">Power BI</span><span class="chip">DAX</span><span class="chip">SQL</span><span class="chip">Looker Studio</span><span class="chip">Modelado de datos</span></div></div>
+    <div class="sg"><h3 data-i18n="stack.dev">Desarrollo</h3><div class="chips"><span class="chip hi">TypeScript</span><span class="chip hi">JavaScript</span><span class="chip">HTML / CSS</span><span class="chip">React</span><span class="chip">APIs REST</span><span class="chip">Webhooks</span></div></div>
+    <div class="sg"><h3 data-i18n="stack.ba">Business Analysis</h3><div class="chips"><span class="chip hi">BPMN</span><span class="chip hi">AS-IS / TO-BE</span><span class="chip">Agile / Scrum</span><span class="chip">SAP SD/FI</span><span class="chip">Dynamics 365</span><span class="chip">Jira / Confluence</span></div></div>
+  </div>
+</section>
+
+<section class="contact" id="contacto">
+  <div class="wrap">
     <div>
-      <div class="section-tag" data-i18n="about.tag">Sobre mí</div>
-      <h2 class="sec-title" data-i18n="about.title">Donde el negocio<br>se encuentra con la IA</h2>
-      <div class="about-text" style="margin-top:24px">
-        <p data-i18n="about.p1">La mayoría de las empresas no tienen un problema de datos. Tienen un <strong>problema de procesos disfrazado de datos</strong>. Llevan años acumulando información, comprando herramientas y contratando analistas — y siguen tomando decisiones lentas, con errores manuales.</p>
-        <p data-i18n="about.p2">Soy <strong>Senior Business Analyst</strong> especializada en automatización e inteligencia artificial aplicada al negocio. Mi trabajo es detectar dónde una empresa pierde horas y dinero, diseñar el proceso correcto y construir el sistema que lo resuelva.</p>
-        <p data-i18n="about.p3">Colapso tres roles en uno: <strong>BA senior + Automation Architect + AI Implementer.</strong> Las empresas medianas pagan muy bien por eso porque evita coordinar tres perfiles distintos.</p>
-      </div>
+      <p class="eyebrow" data-i18n="contact.tag">Contacto</p>
+      <h2 data-i18n="contact.title">Hablemos</h2>
+      <p class="lead" style="margin-bottom:0" data-i18n="contact.lead">¿Buscás un perfil de automatización para tu equipo, o tu empresa pierde horas en procesos manuales? Escribime.</p>
     </div>
-    <div>
-      <div class="section-tag" data-i18n="roles.tag">Experiencia actual</div>
-      <div class="roles" style="margin-top:14px">
-        <div class="role-card">
-          <div class="role-icon" style="background:var(--teal-d)">🏢</div>
-          <div>
-            <div class="role-title" data-i18n="role1.title">Co-Fundadora & Consultora Principal</div>
-            <div class="role-company">ATNIA — Barcelona</div>
-            <div class="role-period" data-i18n="role1.period">2024 → Actualidad</div>
-          </div>
-        </div>
-        <div class="role-card">
-          <div class="role-icon" style="background:var(--blue-d)">⚡</div>
-          <div>
-            <div class="role-title" data-i18n="role2.title">Process Automation Lead</div>
-            <div class="role-company">Diplonautic SL</div>
-            <div class="role-period" data-i18n="role2.period">2025 → Actualidad</div>
-          </div>
-        </div>
-        <div class="role-card">
-          <div class="role-icon" style="background:var(--gold-d)">🎓</div>
-          <div>
-            <div class="role-title" data-i18n="role3.title">MBA en Nuevas Tecnologías</div>
-            <div class="role-company" data-i18n="role3.company">Change Agent in Digital Transformation · 2025</div>
-            <div class="role-period">🌐 ES · EN (C1) · IT (B2) · CAT (B1)</div>
-          </div>
-        </div>
-      </div>
+    <div class="links">
+      <a class="link" href="https://www.linkedin.com/in/brenda-fabri/" target="_blank" rel="noopener"><b>LinkedIn</b><span>in/brenda-fabri</span></a>
+      <a class="link" href="mailto:brenda.afabri@gmail.com"><b>Email</b><span>brenda.afabri@gmail.com</span></a>
+      <a class="link" href="https://github.com/brendafabri" target="_blank" rel="noopener"><b>GitHub</b><span>github.com/brendafabri</span></a>
+      <a class="link" href="https://atnia.es" target="_blank" rel="noopener"><b>ATNIA</b><span>atnia.es</span></a>
+      <a class="link cv-link" href="cv/CV_Brenda_Fabri_ES.pdf" target="_blank" rel="noopener"><b>CV</b><span>PDF ↓</span></a>
     </div>
   </div>
 </section>
 
-<!-- STACK -->
-<section id="stack">
-  <div class="section-tag" data-i18n="stack.tag">Stack técnico</div>
-  <h2 class="sec-title" data-i18n="stack.title">Herramientas & tecnologías</h2>
-  <div class="stack-grid">
-    <div class="stack-group fade-up">
-      <div class="stack-group-title" data-i18n="stack.auto">Automatización</div>
-      <div class="stack-items">
-        <span class="stack-item highlight">n8n</span>
-        <span class="stack-item highlight">Power Automate</span>
-        <span class="stack-item highlight">UiPath</span>
-        <span class="stack-item">Make / Zapier</span>
-        <span class="stack-item">Google Apps Script</span>
-      </div>
-    </div>
-    <div class="stack-group fade-up">
-      <div class="stack-group-title" data-i18n="stack.ai">IA & LLMs</div>
-      <div class="stack-items">
-        <span class="stack-item highlight">OpenAI / Claude</span>
-        <span class="stack-item highlight">RAG Pipelines</span>
-        <span class="stack-item highlight">Prompt Engineering</span>
-        <span class="stack-item">LLM Integration</span>
-        <span class="stack-item">OCR Pipelines</span>
-      </div>
-    </div>
-    <div class="stack-group fade-up">
-      <div class="stack-group-title" data-i18n="stack.bi">Business Intelligence</div>
-      <div class="stack-items">
-        <span class="stack-item highlight">Power BI</span>
-        <span class="stack-item">SQL</span>
-        <span class="stack-item">Looker Studio</span>
-        <span class="stack-item">Excel Avanzado</span>
-        <span class="stack-item">DAX</span>
-      </div>
-    </div>
-    <div class="stack-group fade-up">
-      <div class="stack-group-title" data-i18n="stack.dev">Desarrollo & APIs</div>
-      <div class="stack-items">
-        <span class="stack-item highlight">REST APIs</span>
-        <span class="stack-item highlight">HTML / CSS / JS</span>
-        <span class="stack-item">Webhooks / ETL</span>
-        <span class="stack-item">SharePoint</span>
-        <span class="stack-item">Google Workspace</span>
-      </div>
-    </div>
-    <div class="stack-group fade-up">
-      <div class="stack-group-title" data-i18n="stack.method">Metodología BA</div>
-      <div class="stack-items">
-        <span class="stack-item highlight">BPMN</span>
-        <span class="stack-item highlight">Process Mining</span>
-        <span class="stack-item">Agile / Scrum</span>
-        <span class="stack-item">Design Thinking</span>
-        <span class="stack-item">Jira / Confluence</span>
-      </div>
-    </div>
-    <div class="stack-group fade-up">
-      <div class="stack-group-title" data-i18n="stack.other">Otros</div>
-      <div class="stack-items">
-        <span class="stack-item highlight">RGPD Compliance</span>
-        <span class="stack-item">GitHub</span>
-        <span class="stack-item">Notion</span>
-        <span class="stack-item">Power Platform</span>
-        <span class="stack-item">Gmail API</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="proj-header">
-    <div class="section-tag" data-i18n="proj.tag">Proyectos</div>
-    <h2 class="sec-title" data-i18n="proj.title">Proyectos reales en producción</h2>
-    <p class="sec-sub" data-i18n="proj.sub">Automatizaciones, dashboards y herramientas construidas para resolver problemas de negocio reales — con métricas de impacto documentadas.</p>
-  </div>
-  <div class="proj-grid">
-
-    <!-- 1. Invoice Classifier -->
-    <div class="proj-card c-teal fade-up">
-      <div class="proj-top">
-        <span class="proj-icon">🤖</span>
-        <span class="proj-type type-auto" data-i18n="type.auto">Automatización</span>
-      </div>
-      <div class="proj-title" data-i18n="p1.title">Invoice Classifier</div>
-      <p class="proj-desc" data-i18n="p1.desc">Motor de clasificación inteligente de facturas en Gmail. 5 capas de detección: análisis de asunto, scoring multi-señal, parser XML, OCR bilingüe (ES/CA) y fast-path inteligente.</p>
-      <div class="proj-impact" data-i18n="p1.impact">18.000+ emails clasificados · 700 facturas/mes · 0 intervención humana</div>
-      <div class="proj-tags"><span class="tag">Google Apps Script</span><span class="tag">Gmail API</span><span class="tag">OCR</span><span class="tag">NLP</span></div>
-      <div class="proj-links">
-        <a href="https://github.com/brendafabri/portfolio-projects/tree/main/invoice-classifier" target="_blank" class="proj-link primary">GitHub ↗</a>
-      </div>
-    </div>
-
-    <!-- 2. Aviso Festivos -->
-    <div class="proj-card c-blue fade-up">
-      <div class="proj-top">
-        <span class="proj-icon">⚡</span>
-        <span class="proj-type type-auto" data-i18n="type.auto">Automatización</span>
-      </div>
-      <div class="proj-title" data-i18n="p2.title">Aviso Festivos Proveedores</div>
-      <p class="proj-desc" data-i18n="p2.desc">Flujo Power Automate que detecta festivos 5 días antes y notifica automáticamente a 500+ proveedores con email personalizado y firma corporativa. Incluye deduplicación y log automático.</p>
-      <div class="proj-impact" data-i18n="p2.impact">7.000+ emails/año · 350h de trabajo manual eliminadas · 0 duplicados</div>
-      <div class="proj-tags"><span class="tag">Power Automate</span><span class="tag">Outlook</span><span class="tag">SharePoint</span><span class="tag">Excel</span></div>
-      <div class="proj-links">
-        <a href="https://brendafabri.github.io/portfolio-projects/flujo-aviso-festivos-proveedores.html" target="_blank" class="proj-link primary" data-i18n="link.live">Ver demo ↗</a>
-      </div>
-    </div>
-
-    <!-- 3. Control Horas HR -->
-    <div class="proj-card c-gold fade-up">
-      <div class="proj-top">
-        <span class="proj-icon">📊</span>
-        <span class="proj-type type-bi">Business Intelligence</span>
-      </div>
-      <div class="proj-title" data-i18n="p3.title">Control Automatizado de Horas HR</div>
-      <p class="proj-desc" data-i18n="p3.desc">Sistema Excel que cruza 5 fuentes de datos (ERP, vacaciones, correcciones, desplazamientos, configuración) para generar automáticamente la auditoría mensual de horas de 56 trabajadores.</p>
-      <div class="proj-impact" data-i18n="p3.impact">3 días/mes eliminados · 36 días/año automatizados · 56 trabajadores</div>
-      <div class="proj-tags"><span class="tag">Excel Avanzado</span><span class="tag">Fórmulas dinámicas</span><span class="tag">5 fuentes</span></div>
-      <div class="proj-links">
-        <span class="proj-link" style="cursor:default;opacity:.6" data-i18n="link.private">🔒 Producción privada</span>
-      </div>
-    </div>
-
-    <!-- 4. Inventario STEP -->
-    <div class="proj-card c-teal fade-up">
-      <div class="proj-top">
-        <span class="proj-icon">🗂️</span>
-        <span class="proj-type type-auto" data-i18n="type.auto">Automatización</span>
-      </div>
-      <div class="proj-title" data-i18n="p4.title">Inventario STEP → Sheets</div>
-      <p class="proj-desc" data-i18n="p4.desc">Script Google Apps Script que lee carpetas de Google Drive con archivos STEP, parsea nombres de archivo con regex para extraer piezas, unidades y tipos de rosca, y genera un inventario formateado automáticamente.</p>
-      <div class="proj-impact" data-i18n="p4.impact">Inventario técnico naval 100% automatizado · 0 entrada manual</div>
-      <div class="proj-tags"><span class="tag">Google Apps Script</span><span class="tag">Drive API</span><span class="tag">Regex</span><span class="tag">Sheets</span></div>
-      <div class="proj-links">
-        <span class="proj-link" style="cursor:default;opacity:.6" data-i18n="link.private">🔒 Producción privada</span>
-      </div>
-    </div>
-
-    <!-- 5. Formulario Alta Artículos -->
-    <div class="proj-card c-blue fade-up">
-      <div class="proj-top">
-        <span class="proj-icon">📋</span>
-        <span class="proj-type type-auto" data-i18n="type.auto">Automatización</span>
-      </div>
-      <div class="proj-title" data-i18n="p5.title">Formulario Alta de Artículos</div>
-      <p class="proj-desc" data-i18n="p5.desc">Web app embebida en Google Sheets para dar de alta piezas náuticas en el catálogo. Carga campos dinámicamente, incluye búsqueda en 300+ familias jerárquicas y valida antes de guardar.</p>
-      <div class="proj-impact" data-i18n="p5.impact">23 campos estandarizados · 300+ familias navegables · 0 errores de referencia</div>
-      <div class="proj-tags"><span class="tag">Google Apps Script</span><span class="tag">HTML/CSS/JS</span><span class="tag">Sheets API</span></div>
-      <div class="proj-links">
-        <a href="https://github.com/brendafabri/portfolio-projects/tree/main/article-form" target="_blank" class="proj-link primary">GitHub ↗</a>
-      </div>
-    </div>
-
-    <!-- 6. Demo Clínicas -->
-    <div class="proj-card c-teal fade-up">
-      <div class="proj-top">
-        <span class="proj-icon">🏥</span>
-        <span class="proj-type type-demo" data-i18n="type.demo">Demo</span>
-      </div>
-      <div class="proj-title" data-i18n="p6.title">Sistema de Recuperación de Presupuestos</div>
-      <p class="proj-desc" data-i18n="p6.desc">Demo interactiva para clínicas. Simula secuencia automática de 4 mensajes WhatsApp con lógica de parada cuando el paciente responde, panel de tracking en tiempo real y alertas al equipo.</p>
-      <div class="proj-impact" data-i18n="p6.impact">30% recuperación de presupuestos sin respuesta · Demo en producción</div>
-      <div class="proj-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">WhatsApp API</span></div>
-      <div class="proj-links">
-        <a href="https://atnia.es" target="_blank" class="proj-link primary" data-i18n="link.live">Ver en ATNIA ↗</a>
-      </div>
-    </div>
-
-    <!-- 7. SaaS Dashboard -->
-    <div class="proj-card c-blue fade-up">
-      <div class="proj-top">
-        <span class="proj-icon">📈</span>
-        <span class="proj-type type-bi">Business Intelligence</span>
-      </div>
-      <div class="proj-title" data-i18n="p7.title">SaaS Operations Dashboard</div>
-      <p class="proj-desc" data-i18n="p7.desc">Dashboard ejecutivo interactivo de operaciones para empresa SaaS. KPIs en tiempo real, gráfico de tendencia, distribución de tareas, análisis por proceso y tabla de oportunidades. Filtros por período.</p>
-      <div class="proj-impact" data-i18n="p7.impact">4 KPIs · 5 visualizaciones · filtros Q1/Q2/Q3/Q4</div>
-      <div class="proj-tags"><span class="tag">Power BI</span><span class="tag">Chart.js</span><span class="tag">Data viz</span></div>
-      <div class="proj-links">
-        <a href="https://brendafabri.github.io/portfolio-projects/saas-operations-dashboard.html" target="_blank" class="proj-link primary" data-i18n="link.live">Ver demo ↗</a>
-      </div>
-    </div>
-
-    <!-- 8. Sales Pipeline -->
-    <div class="proj-card c-gold fade-up">
-      <div class="proj-top">
-        <span class="proj-icon">💰</span>
-        <span class="proj-type type-bi">Business Intelligence</span>
-      </div>
-      <div class="proj-title" data-i18n="p8.title">Sales Pipeline Tracker</div>
-      <p class="proj-desc" data-i18n="p8.desc">Dashboard de seguimiento comercial con pipeline total, win rate, ciclo de venta, funnel por etapas, revenue por vendedor y tendencia mensual. Filtros cruzados por equipo y período.</p>
-      <div class="proj-impact" data-i18n="p8.impact">€945K pipeline · 65.8% win rate · filtros EMEA/LATAM/Q1-Q3</div>
-      <div class="proj-tags"><span class="tag">Power BI</span><span class="tag">Chart.js</span><span class="tag">DAX logic</span></div>
-      <div class="proj-links">
-        <a href="https://brendafabri.github.io/portfolio-projects/sales-pipeline-tracker.html" target="_blank" class="proj-link primary" data-i18n="link.live">Ver demo ↗</a>
-      </div>
-    </div>
-
-    <!-- 9. Tutorial Fluke -->
-    <div class="proj-card c-gold fade-up">
-      <div class="proj-top">
-        <span class="proj-icon">📚</span>
-        <span class="proj-type type-doc" data-i18n="type.doc">Documentación</span>
-      </div>
-      <div class="proj-title" data-i18n="p9.title">Tutorial Técnico — Fluke 435-II</div>
-      <p class="proj-desc" data-i18n="p9.desc">Guía didáctica paso a paso para técnicos sin experiencia sobre cómo usar el analizador de calidad eléctrica Fluke 435-II y generar informes con Power Log 5.9. Creada desde cero para preservar conocimiento institucional.</p>
-      <div class="proj-impact" data-i18n="p9.impact">Knowledge transfer · proceso rescatado · 6 páginas ilustradas</div>
-      <div class="proj-tags"><span class="tag">Documentación técnica</span><span class="tag">Knowledge management</span></div>
-      <div class="proj-links">
-        <span class="proj-link" style="cursor:default;opacity:.6" data-i18n="link.internal">📄 Uso interno</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-tag" data-i18n="contact.tag">Contacto</div>
-  <h2 class="sec-title" data-i18n="contact.title">Hablemos</h2>
-  <p class="sec-sub" data-i18n="contact.sub">¿Tu empresa pierde horas en procesos manuales o tiene datos que no se convierten en decisiones? Escribime.</p>
-  <div class="contact-links">
-    <a href="https://www.linkedin.com/in/brenda-fabri/" target="_blank" class="contact-link">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      LinkedIn
-    </a>
-    <a href="https://github.com/brendafabri" target="_blank" class="contact-link">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-      GitHub
-    </a>
-    <a href="mailto:brenda.afabri@gmail.com" class="contact-link">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      brenda.afabri@gmail.com
-    </a>
-    <a href="https://atnia.es" target="_blank" class="contact-link">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      atnia.es
-    </a>
-    <a href="https://app.notion.com/p/Brenda-Fabri-3488b28cc545803f872cf5380f7e391a?source=copy_link" target="_blank" class="contact-link">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z"/></svg>
-      Portfolio completo + CVs
-    </a>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  <p>© 2025 <a href="#">Brenda Fabri</a> — Senior BA & AI Automation Specialist · Barcelona</p>
-  <p style="font-family:'JetBrains Mono',monospace;font-size:11px">brendafabri.github.io</p>
+  <div class="wrap">
+    <span>© 2026 Brenda Fabri · Process Optimization &amp; Automation · Barcelona</span>
+    <span class="mono">brendafabri.github.io</span>
+  </div>
 </footer>
 
 <script>
 // ── TRANSLATIONS ──
 const T = {
   es:{
-    "nav.about":"Sobre mí","nav.stack":"Stack","nav.projects":"Proyectos","nav.contact":"Contacto",
-    "hero.available":"Disponible para consultoría",
-    "hero.tagline":"<strong>Convierto procesos en sistemas inteligentes que trabajan solos.</strong><br>Analizo operaciones con lógica BA senior, diseño la automatización con IA y la implemento — sin que el cliente necesite un equipo técnico aparte.",
-    "hero.cta1":"Ver proyectos →","hero.cta2":"Contactar",
-    "stat.years":"años de experiencia","stat.emails":"emails automatizados","stat.workers":"trabajadores controlados","stat.saved":"trabajo/año eliminadas",
-    "about.tag":"Sobre mí","about.title":"Donde el negocio<br>se encuentra con la IA",
-    "about.p1":"La mayoría de las empresas no tienen un problema de datos. Tienen un <strong>problema de procesos disfrazado de datos</strong>. Llevan años acumulando información, comprando herramientas y contratando analistas — y siguen tomando decisiones lentas, con errores manuales.",
-    "about.p2":"Soy <strong>Senior Business Analyst</strong> especializada en automatización e inteligencia artificial aplicada al negocio. Mi trabajo es detectar dónde una empresa pierde horas y dinero, diseñar el proceso correcto y construir el sistema que lo resuelva.",
-    "about.p3":"Colapso tres roles en uno: <strong>BA senior + Automation Architect + AI Implementer.</strong> Las empresas medianas pagan muy bien por eso porque evita coordinar tres perfiles distintos.",
-    "roles.tag":"Experiencia actual",
-    "role1.title":"Co-Fundadora & Consultora Principal","role1.period":"2024 → Actualidad",
-    "role2.title":"Process Automation Lead","role2.period":"2025 → Actualidad",
-    "role3.title":"MBA en Nuevas Tecnologías","role3.company":"Change Agent in Digital Transformation · 2025",
-    "stack.tag":"Stack técnico","stack.title":"Herramientas & tecnologías",
-    "stack.auto":"Automatización","stack.ai":"IA & LLMs","stack.bi":"Business Intelligence",
-    "stack.dev":"Desarrollo & APIs","stack.method":"Metodología BA","stack.other":"Otros",
-    "proj.tag":"Proyectos","proj.title":"Proyectos reales en producción",
-    "proj.sub":"Automatizaciones, dashboards y herramientas construidas para resolver problemas de negocio reales — con métricas de impacto documentadas.",
-    "type.auto":"Automatización","type.doc":"Documentación","type.demo":"Demo",
-    "p1.title":"Invoice Classifier","p1.desc":"Motor de clasificación inteligente de facturas en Gmail. 5 capas de detección: análisis de asunto, scoring multi-señal, parser XML, OCR bilingüe (ES/CA) y fast-path inteligente.","p1.impact":"18.000+ emails clasificados · 700 facturas/mes · 0 intervención humana",
-    "p2.title":"Aviso Festivos Proveedores","p2.desc":"Flujo Power Automate que detecta festivos 5 días antes y notifica automáticamente a 500+ proveedores con email personalizado y firma corporativa. Incluye deduplicación y log automático.","p2.impact":"7.000+ emails/año · 350h de trabajo manual eliminadas · 0 duplicados",
-    "p3.title":"Control Automatizado de Horas HR","p3.desc":"Sistema Excel que cruza 5 fuentes de datos para generar automáticamente la auditoría mensual de horas de 56 trabajadores con 6 estados de clasificación automática.","p3.impact":"3 días/mes eliminados · 36 días/año automatizados · 56 trabajadores",
-    "p4.title":"Inventario STEP → Sheets","p4.desc":"Script que lee carpetas de Google Drive con archivos STEP, parsea nombres de archivo con regex para extraer piezas, unidades y tipos de rosca, y genera inventario formateado automáticamente.","p4.impact":"Inventario técnico naval 100% automatizado · 0 entrada manual",
-    "p5.title":"Formulario Alta de Artículos","p5.desc":"Web app embebida en Google Sheets para dar de alta piezas náuticas en el catálogo. Carga campos dinámicamente, incluye búsqueda en 300+ familias jerárquicas y valida antes de guardar.","p5.impact":"23 campos estandarizados · 300+ familias navegables · 0 errores de referencia",
-    "p6.title":"Sistema de Recuperación de Presupuestos","p6.desc":"Demo interactiva para clínicas. Simula secuencia automática de 4 mensajes WhatsApp con lógica de parada, panel de tracking en tiempo real y alertas al equipo.","p6.impact":"30% recuperación de presupuestos sin respuesta · Demo en producción",
-    "p7.title":"SaaS Operations Dashboard","p7.desc":"Dashboard ejecutivo interactivo de operaciones. KPIs en tiempo real, gráfico de tendencia, distribución de tareas, análisis por proceso y tabla de oportunidades. Filtros por período.","p7.impact":"4 KPIs · 5 visualizaciones · filtros Q1/Q2/Q3/Q4",
-    "p8.title":"Sales Pipeline Tracker","p8.desc":"Dashboard de seguimiento comercial con pipeline total, win rate, ciclo de venta, funnel por etapas, revenue por vendedor y tendencia mensual. Filtros cruzados por equipo y período.","p8.impact":"€945K pipeline · 65.8% win rate · filtros EMEA/LATAM/Q1-Q3",
-    "p9.title":"Tutorial Técnico — Fluke 435-II","p9.desc":"Guía didáctica paso a paso para técnicos sin experiencia sobre cómo usar el analizador de calidad eléctrica Fluke 435-II. Creada desde cero para preservar conocimiento institucional.","p9.impact":"Knowledge transfer · proceso rescatado · 6 páginas ilustradas",
-    "link.live":"Ver demo ↗","link.private":"🔒 Producción privada","link.internal":"📄 Uso interno",
-    "contact.tag":"Contacto","contact.title":"Hablemos","contact.sub":"¿Tu empresa pierde horas en procesos manuales o tiene datos que no se convierten en decisiones? Escribime.","link.notion":"Portfolio completo + CVs"
+    "nav.impact":"Impacto","nav.xp":"Experiencia","nav.projects":"Proyectos","nav.stack":"Stack","nav.contact":"Contacto",
+    "hero.status":"Process Optimization &amp; Automation · Barcelona",
+    "hero.pitch":"Convierto procesos manuales en flujos que corren solos, con métricas de impacto medibles.",
+    "hero.sub":"Más de 7 años entre análisis de negocio y automatización: Power Automate, Office Scripts, UiPath, Apps Script e IA aplicada. El panel reproduce flujos reales que tengo en producción.",
+    "hero.cv":"Descargar CV ↓","hero.talk":"Hablemos de un proyecto",
+    "aud.hire.t":"Para equipos que contratan","aud.hire.p":"Perfil BA + automatización en Microsoft 365 y Google Workspace, con experiencia en entornos multinacionales.",
+    "aud.biz.t":"Para empresas · ATNIA","aud.biz.p":"Diagnóstico y automatización end-to-end para pymes, con cumplimiento RGPD desde el diseño.",
+    "run.case":"Ver proyecto →","run.result":"Resultado","run.running":"ejecutando","run.done":"completado","run.started":"iniciado",
+    "kpi.1":"emails clasificados sin intervención","kpi.2":"de trabajo manual eliminadas al año","kpi.3":"filas procesadas por campaña de costes","kpi.4":"persona-días eliminados por ciclo",
+    "xp.tag":"Experiencia","xp.title":"De operaciones a automatización",
+    "xp.lead":"Empecé optimizando procesos desde operaciones y administración. Hoy diseño y construyo las automatizaciones que los reemplazan.",
+    "xp.1.d":"ago 2026 → hoy","xp.1.p":"Automatización de procesos con proveedores usando conectores estándar de Microsoft 365: assessments de sostenibilidad, petición anual de costes y envío de documentación de compliance.",
+    "xp.2.d":"2024 → hoy","xp.2.t":"Co-Fundadora y Consultora Principal","xp.2.p":"Consultora de automatización con IA para empresas medianas que quieren escalar operaciones sin aumentar equipo, con cumplimiento RGPD desde el diseño.",
+    "xp.3.d":"2025 → jun 2026","xp.3.p":"Clasificador de facturas con OCR bilingüe, avisos de festivos a 500+ proveedores, control de horas de 56 personas, dashboards Power BI e integración de IA generativa.",
+    "xp.4.p":"Rediseño de procesos con un 75% menos de errores operativos, automatización Excel/VBA, KPIs para Volkswagen, Nissan y Chevrolet, y un equipo directo de 5+ personas.",
+    "edu.t":"Formación","edu.1":"Máster en Transformación Digital<span>Business School IOE · 2025</span>","edu.2":"Licenciatura en Administración de Empresas<span>Universidad Nacional de Cuyo · 2016</span>","edu.3":"Certificaciones<span>IA Generativa Aplicada · Data Analyst &amp; Power BI · SCRUM · JavaScript &amp; React</span>",
+    "lang.t":"Idiomas","lang.es":"Español","lang.en":"Inglés","lang.it":"Italiano","lang.ca":"Catalán","lang.native":"Nativo",
+    "cv.p":"CV completo en PDF, dos páginas.",
+    "proj.tag":"Proyectos","proj.title":"Proyectos reales en producción","proj.lead":"Automatizaciones, dashboards y herramientas construidas para resolver problemas de negocio reales, con métricas de impacto documentadas.",
+    "f.all":"Todos","f.auto":"Automatización","f.bi":"Business Intelligence","f.demo":"Demo","f.doc":"Documentación",
+    "l.github":"GitHub ↗","l.demo":"Ver demo ↗","l.atnia":"Ver en ATNIA ↗","l.private":"Producción privada","l.internal":"Uso interno",
+    "stack.tag":"Stack técnico","stack.title":"Herramientas y tecnologías","stack.lead":"En verde, lo que uso a diario en producción.",
+    "stack.auto":"Automatización","stack.ai":"IA y LLMs","stack.bi":"Datos y BI","stack.dev":"Desarrollo","stack.ba":"Business Analysis",
+    "contact.tag":"Contacto","contact.title":"Hablemos","contact.lead":"¿Buscás un perfil de automatización para tu equipo, o tu empresa pierde horas en procesos manuales? Escribime."
   },
   en:{
-    "nav.about":"About","nav.stack":"Stack","nav.projects":"Projects","nav.contact":"Contact",
-    "hero.available":"Available for consulting",
-    "hero.tagline":"<strong>I turn business processes into intelligent systems that run themselves.</strong><br>I analyze operations with senior BA logic, design the automation with AI, and implement it — without the client needing a separate technical team.",
-    "hero.cta1":"View projects →","hero.cta2":"Contact me",
-    "stat.years":"years of experience","stat.emails":"automated emails","stat.workers":"workers tracked","stat.saved":"hours/year eliminated",
-    "about.tag":"About me","about.title":"Where business<br>meets AI",
-    "about.p1":"Most companies don't have a data problem. They have a <strong>process problem disguised as a data problem</strong>. They've spent years collecting information, buying tools and hiring analysts — and still make slow decisions with manual errors.",
-    "about.p2":"I'm a <strong>Senior Business Analyst</strong> specializing in automation and AI applied to business operations. My job is to detect where a company loses hours and money, design the right process, and build the system that solves it.",
-    "about.p3":"I collapse three roles into one: <strong>Senior BA + Automation Architect + AI Implementer.</strong> Mid-sized companies pay well for that because it avoids coordinating three separate profiles.",
-    "roles.tag":"Current roles",
-    "role1.title":"Co-Founder & Lead Consultant","role1.period":"2024 → Present",
-    "role2.title":"Process Automation Lead","role2.period":"2025 → Present",
-    "role3.title":"MBA in New Technologies","role3.company":"Change Agent in Digital Transformation · 2025",
-    "stack.tag":"Tech stack","stack.title":"Tools & technologies",
-    "stack.auto":"Automation","stack.ai":"AI & LLMs","stack.bi":"Business Intelligence",
-    "stack.dev":"Dev & APIs","stack.method":"BA Methodology","stack.other":"Other",
-    "proj.tag":"Projects","proj.title":"Real projects in production",
-    "proj.sub":"Automations, dashboards and tools built to solve real business problems — with documented impact metrics.",
-    "type.auto":"Automation","type.doc":"Documentation","type.demo":"Demo",
-    "p1.title":"Invoice Classifier","p1.desc":"Intelligent invoice classification engine for Gmail. 5 detection layers: subject analysis, multi-signal scoring, XML parser, bilingual OCR (ES/CA) and smart fast-path.","p1.impact":"18,000+ emails classified · 700 invoices/month · 0 human intervention",
-    "p2.title":"Holiday Notice Automation","p2.desc":"Power Automate flow detecting holidays 5 days in advance and automatically notifying 500+ suppliers with personalized emails and corporate signature. Includes deduplication and auto-log.","p2.impact":"7,000+ emails/year · 350h manual work eliminated · 0 duplicates",
-    "p3.title":"Automated HR Hours Control","p3.desc":"Excel system crossing 5 data sources to automatically generate the monthly hours audit for 56 workers with 6 automatic classification states.","p3.impact":"3 days/month eliminated · 36 days/year automated · 56 workers",
-    "p4.title":"STEP Inventory → Sheets","p4.desc":"Script reading Google Drive folders with STEP files, parsing filenames with regex to extract parts, units and thread types, auto-generating a formatted inventory.","p4.impact":"100% automated naval inventory · 0 manual entry",
-    "p5.title":"Article Registration Form","p5.desc":"Web app embedded in Google Sheets for registering nautical parts in the catalog. Dynamically loads fields, includes search across 300+ hierarchical families and validates before saving.","p5.impact":"23 standardized fields · 300+ searchable families · 0 reference errors",
-    "p6.title":"Quote Recovery System","p6.desc":"Interactive demo for clinics. Simulates automatic 4-message WhatsApp sequence with stop logic when patient responds, real-time tracking panel and team alerts.","p6.impact":"30% quote recovery rate · Live production demo",
-    "p7.title":"SaaS Operations Dashboard","p7.desc":"Interactive executive operations dashboard. Real-time KPIs, trend chart, task distribution, process analysis and opportunities table. Period filters.","p7.impact":"4 KPIs · 5 visualizations · Q1/Q2/Q3/Q4 filters",
-    "p8.title":"Sales Pipeline Tracker","p8.desc":"Sales tracking dashboard with total pipeline, win rate, sales cycle, stage funnel, revenue by salesperson and monthly trend. Cross-filters by team and period.","p8.impact":"€945K pipeline · 65.8% win rate · EMEA/LATAM/Q1-Q3 filters",
-    "p9.title":"Technical Guide — Fluke 435-II","p9.desc":"Step-by-step didactic guide for non-technical staff on using the Fluke 435-II power quality analyzer. Created from scratch to preserve institutional knowledge.","p9.impact":"Knowledge transfer · rescued process · 6 illustrated pages",
-    "link.live":"View demo ↗","link.private":"🔒 Private production","link.internal":"📄 Internal use",
-    "contact.tag":"Contact","contact.title":"Let's talk","contact.sub":"Is your company losing hours on manual processes or has data that isn't becoming decisions? Reach out.","link.notion":"Full portfolio + CVs"
+    "nav.impact":"Impact","nav.xp":"Experience","nav.projects":"Projects","nav.stack":"Stack","nav.contact":"Contact",
+    "hero.status":"Process Optimization &amp; Automation · Barcelona",
+    "hero.pitch":"I turn manual processes into flows that run on their own, with measurable impact.",
+    "hero.sub":"7+ years across business analysis and automation: Power Automate, Office Scripts, UiPath, Apps Script and applied AI. The panel replays real flows I run in production.",
+    "hero.cv":"Download CV ↓","hero.talk":"Discuss a project",
+    "aud.hire.t":"For hiring teams","aud.hire.p":"BA + automation profile across Microsoft 365 and Google Workspace, with experience in multinational environments.",
+    "aud.biz.t":"For companies · ATNIA","aud.biz.p":"End-to-end process diagnosis and automation for SMBs, GDPR-compliant by design.",
+    "run.case":"See project →","run.result":"Result","run.running":"running","run.done":"completed","run.started":"started",
+    "kpi.1":"emails classified with no manual work","kpi.2":"of manual work eliminated per year","kpi.3":"rows processed per cost campaign","kpi.4":"person-days eliminated per cycle",
+    "xp.tag":"Experience","xp.title":"From operations to automation",
+    "xp.lead":"I started by improving processes from operations and administration. Today I design and build the automations that replace them.",
+    "xp.1.d":"Aug 2026 → now","xp.1.p":"Supplier process automation using standard Microsoft 365 connectors: sustainability assessments, the annual cost request and compliance documentation mailing.",
+    "xp.2.d":"2024 → now","xp.2.t":"Co-Founder &amp; Lead Consultant","xp.2.p":"AI automation consultancy for mid-sized companies that want to scale operations without growing headcount, GDPR-compliant by design.",
+    "xp.3.d":"2025 → Jun 2026","xp.3.p":"Invoice classifier with bilingual OCR, holiday notices to 500+ suppliers, hours control for 56 people, Power BI dashboards and generative AI integration.",
+    "xp.4.p":"Process redesign with 75% fewer operational errors, Excel/VBA automation, KPIs for Volkswagen, Nissan and Chevrolet, and a direct team of 5+.",
+    "edu.t":"Education","edu.1":"Master's in Digital Transformation<span>Business School IOE · 2025</span>","edu.2":"Bachelor's in Business Administration<span>Universidad Nacional de Cuyo · 2016</span>","edu.3":"Certifications<span>Applied Generative AI · Data Analyst &amp; Power BI · SCRUM · JavaScript &amp; React</span>",
+    "lang.t":"Languages","lang.es":"Spanish","lang.en":"English","lang.it":"Italian","lang.ca":"Catalan","lang.native":"Native",
+    "cv.p":"Full two-page CV in PDF.",
+    "proj.tag":"Projects","proj.title":"Real projects in production","proj.lead":"Automations, dashboards and tools built to solve real business problems, with documented impact metrics.",
+    "f.all":"All","f.auto":"Automation","f.bi":"Business Intelligence","f.demo":"Demo","f.doc":"Documentation",
+    "l.github":"GitHub ↗","l.demo":"View demo ↗","l.atnia":"View on ATNIA ↗","l.private":"Private production","l.internal":"Internal use",
+    "stack.tag":"Tech stack","stack.title":"Tools and technologies","stack.lead":"Highlighted: what I use daily in production.",
+    "stack.auto":"Automation","stack.ai":"AI and LLMs","stack.bi":"Data and BI","stack.dev":"Development","stack.ba":"Business Analysis",
+    "contact.tag":"Contact","contact.title":"Let's talk","contact.lead":"Looking for an automation profile for your team, or is your company losing hours on manual processes? Get in touch."
   }
 };
 
-let lang = localStorage.getItem('bf-lang') || 'es';
+// ── PROJECTS ── (cat: auto | bi | demo | doc; link.k: github | demo | atnia | private | internal)
+const GH = "https://github.com/brendafabri/portfolio-projects/tree/main/";
+const SITE = "https://brendafabri.github.io/portfolio-projects/";
+const PROJECTS = [
+  {id:"invoice",cat:"auto",org:"Diplonautic",
+   es:{t:"Invoice Classifier",d:"Motor de clasificación inteligente de facturas en Gmail. 5 capas de detección: análisis de asunto, scoring multi-señal, parser XML, OCR bilingüe (ES/CA) y fast-path.",m:["18.000+ emails clasificados","700 facturas/mes","0 intervención humana"]},
+   en:{t:"Invoice Classifier",d:"Intelligent invoice classification engine for Gmail. 5 detection layers: subject analysis, multi-signal scoring, XML parser, bilingual OCR (ES/CA) and fast-path.",m:["18,000+ emails classified","700 invoices/month","0 human intervention"]},
+   tags:["Google Apps Script","Gmail API","OCR","NLP"],link:{k:"github",u:GH+"invoice-classifier"}},
+  {id:"festivos",cat:"auto",org:"Diplonautic",
+   es:{t:"Aviso de Festivos a Proveedores",d:"Flujo Power Automate que detecta festivos 5 días antes y notifica automáticamente a 500+ proveedores con email personalizado y firma corporativa. Incluye deduplicación y log automático.",m:["7.000+ emails/año","350 h/año eliminadas","0 duplicados"]},
+   en:{t:"Supplier Holiday Notices",d:"Power Automate flow that detects holidays 5 days ahead and notifies 500+ suppliers with a personalized email and corporate signature. Includes deduplication and an automatic log.",m:["7,000+ emails/year","350 h/year eliminated","0 duplicates"]},
+   tags:["Power Automate","Outlook","SharePoint","Excel"],link:{k:"demo",u:SITE+"flujo-aviso-festivos-proveedores.html"}},
+  {id:"hr",cat:"bi",org:"Diplonautic",
+   es:{t:"Control Automatizado de Horas HR",d:"Sistema Excel que cruza 5 fuentes de datos (ERP, vacaciones, correcciones, desplazamientos y configuración) para generar la auditoría mensual de horas de 56 trabajadores.",m:["3 días/mes eliminados","36 días/año","56 trabajadores"]},
+   en:{t:"Automated HR Hours Control",d:"Excel system that crosses 5 data sources (ERP, vacations, corrections, travel and config) to generate the monthly hours audit for 56 workers.",m:["3 days/month eliminated","36 days/year","56 workers"]},
+   tags:["Excel avanzado","Fórmulas dinámicas","5 fuentes"],link:{k:"private"}},
+  {id:"step",cat:"auto",org:"Diplonautic",
+   es:{t:"Inventario STEP → Sheets",d:"Script que lee carpetas de Google Drive con archivos STEP, parsea los nombres con regex para extraer piezas, unidades y tipos de rosca, y genera un inventario formateado.",m:["Inventario 100% automatizado","0 entrada manual"]},
+   en:{t:"STEP Inventory → Sheets",d:"Script that reads Google Drive folders of STEP files, parses filenames with regex to extract parts, units and thread types, and builds a formatted inventory.",m:["100% automated inventory","0 manual entry"]},
+   tags:["Google Apps Script","Drive API","Regex","Sheets"],link:{k:"private"}},
+  {id:"article",cat:"auto",org:"Diplonautic",
+   es:{t:"Formulario Alta de Artículos",d:"Web app embebida en Google Sheets para dar de alta piezas náuticas en el catálogo. Carga campos dinámicamente, busca en 300+ familias jerárquicas y valida antes de guardar.",m:["23 campos estandarizados","300+ familias","0 errores de referencia"]},
+   en:{t:"Article Registration Form",d:"Web app embedded in Google Sheets for registering nautical parts in the catalog. Loads fields dynamically, searches 300+ hierarchical families and validates before saving.",m:["23 standardized fields","300+ families","0 reference errors"]},
+   tags:["Google Apps Script","HTML/CSS/JS","Sheets API"],link:{k:"github",u:GH+"article-form"}},
+  {id:"assess",cat:"auto",org:"B2B multinacional|B2B multinational",
+   es:{t:"Assessments de Sostenibilidad por Proveedor",d:"Divide un consolidado de 109 columnas en un fichero de evaluación por proveedor, lo envía y reconsolida las respuestas en el formato de importación del PIM. Solo conectores estándar de Microsoft 365.",m:["~135 proveedores","9 persona-días/ciclo eliminados","~900 filas reconsolidadas"]},
+   en:{t:"Supplier Sustainability Assessments",d:"Splits a 109-column consolidated file into one assessment file per supplier, sends it and re-consolidates the responses into the PIM import format. Standard Microsoft 365 connectors only.",m:["~135 suppliers","9 person-days/cycle eliminated","~900 rows re-consolidated"]},
+   tags:["Power Automate","Office Scripts","SharePoint","Excel avanzado"],link:{k:"github",u:GH+"supplier-sustainability-assessments"}},
+  {id:"cost",cat:"auto",org:"B2B multinacional|B2B multinational",
+   es:{t:"Petición Anual de Costes a Proveedores",d:"Extrae de un catálogo maestro los productos de cada proveedor, genera su Excel de tarifas y prepara el correo con adjuntos en un buzón compartido para revisión.",m:["~300 proveedores","~40.000 filas procesadas","2 adjuntos por correo"]},
+   en:{t:"Annual Supplier Cost Request",d:"Extracts each supplier's products from a master catalog, generates their price file and prepares the email with attachments in a shared mailbox for review.",m:["~300 suppliers","~40,000 rows processed","2 attachments per email"]},
+   tags:["Power Automate","Office Scripts","SharePoint","Outlook"],link:{k:"github",u:GH+"supplier-cost-request"}},
+  {id:"comp",cat:"auto",org:"B2B multinacional|B2B multinational",
+   es:{t:"Envío de Documentación de Compliance",d:"Cruza dos bases de datos de producto y envase, genera solo los ficheros que tienen datos y envía correos bilingües con adjuntos dinámicos.",m:["2 bases de datos","1–2 adjuntos dinámicos","ES / EN"]},
+   en:{t:"Compliance Documentation Mailing",d:"Joins two product and packaging databases, generates only the files that contain data and sends bilingual emails with dynamic attachments.",m:["2 databases","1–2 dynamic attachments","ES / EN"]},
+   tags:["Power Automate","Office Scripts","SharePoint","Outlook"],link:{k:"github",u:GH+"supplier-compliance-mailing"}},
+  {id:"clinic",cat:"demo",org:"ATNIA",
+   es:{t:"Recuperación de Presupuestos para Clínicas",d:"Demo interactiva: secuencia automática de 4 mensajes de WhatsApp con lógica de parada cuando el paciente responde, panel de seguimiento en tiempo real y alertas al equipo.",m:["30% de presupuestos recuperados","Demo en producción"]},
+   en:{t:"Clinic Quote Recovery",d:"Interactive demo: an automatic 4-message WhatsApp sequence that stops when the patient replies, a real-time tracking panel and team alerts.",m:["30% quote recovery","Live demo"]},
+   tags:["HTML","CSS","JavaScript","WhatsApp API"],link:{k:"atnia",u:"https://atnia.es"}},
+  {id:"saas",cat:"bi",org:"Demo",
+   es:{t:"SaaS Operations Dashboard",d:"Dashboard ejecutivo interactivo de operaciones: KPIs, tendencia, distribución de tareas, análisis por proceso y tabla de oportunidades, con filtros por período.",m:["4 KPIs","5 visualizaciones","Q1–Q4"]},
+   en:{t:"SaaS Operations Dashboard",d:"Interactive executive operations dashboard: KPIs, trend, task distribution, process analysis and opportunities table, with period filters.",m:["4 KPIs","5 visualizations","Q1–Q4"]},
+   tags:["Power BI","Chart.js","Data viz"],link:{k:"demo",u:SITE+"saas-operations-dashboard.html"}},
+  {id:"sales",cat:"bi",org:"Demo",
+   es:{t:"Sales Pipeline Tracker",d:"Seguimiento comercial con pipeline total, win rate, ciclo de venta, funnel por etapas, revenue por vendedor y tendencia mensual, con filtros cruzados por equipo y período.",m:["€945K pipeline","65,8% win rate","EMEA / LATAM"]},
+   en:{t:"Sales Pipeline Tracker",d:"Sales tracking with total pipeline, win rate, sales cycle, stage funnel, revenue by rep and monthly trend, with cross-filters by team and period.",m:["€945K pipeline","65.8% win rate","EMEA / LATAM"]},
+   tags:["Power BI","Chart.js","DAX"],link:{k:"demo",u:SITE+"sales-pipeline-tracker.html"}},
+  {id:"fluke",cat:"doc",org:"Diplonautic",
+   es:{t:"Tutorial Técnico Fluke 435-II",d:"Guía paso a paso para técnicos sin experiencia sobre el analizador de calidad eléctrica Fluke 435-II y la generación de informes con Power Log. Creada para preservar conocimiento institucional.",m:["Knowledge transfer","6 páginas ilustradas"]},
+   en:{t:"Fluke 435-II Technical Guide",d:"Step-by-step guide for non-technical staff on the Fluke 435-II power quality analyzer and Power Log reports. Created to preserve institutional knowledge.",m:["Knowledge transfer","6 illustrated pages"]},
+   tags:["Documentación técnica","Knowledge management"],link:{k:"internal"}}
+];
+const CAT_LABEL = {auto:"f.auto",bi:"f.bi",demo:"f.demo",doc:"f.doc"};
 
-function toggleLang(){
-  lang = lang === 'es' ? 'en' : 'es';
-  localStorage.setItem('bf-lang', lang);
-  applyLang();
-  document.getElementById('langBtn').textContent = lang === 'es' ? 'EN' : 'ES';
-  document.documentElement.lang = lang;
-}
+// ── LIVE FLOWS ── (project: id in PROJECTS)
+const FLOWS = [
+  {project:"assess",tab:{es:"Assessments",en:"Assessments"},name:"supplier-sustainability-assessments",
+   result:{es:"9 persona-días ahorrados por ciclo",en:"9 person-days saved per cycle"},
+   steps:[
+     {k:"trigger",ic:"▶",c:{es:"Disparador",en:"Trigger"},n:{es:"Inicio del ciclo de evaluación",en:"Assessment cycle starts"},m:{es:"manual",en:"manual"}},
+     {k:"data",ic:"XLS",c:{es:"Excel Online",en:"Excel Online"},n:{es:"Leer consolidado",en:"Read consolidated file"},m:{es:"109 columnas",en:"109 columns"}},
+     {k:"script",ic:"TS",c:{es:"Office Script",en:"Office Script"},n:{es:"Dividir por proveedor",en:"Split by supplier"},m:{es:"~135 ficheros",en:"~135 files"}},
+     {k:"mail",ic:"@",c:{es:"Outlook",en:"Outlook"},n:{es:"Enviar evaluación",en:"Send assessment"},m:{es:"~135 correos",en:"~135 emails"}},
+     {k:"script",ic:"TS",c:{es:"Office Script",en:"Office Script"},n:{es:"Reconsolidar respuestas",en:"Re-consolidate responses"},m:{es:"~900 filas",en:"~900 rows"}},
+     {k:"data",ic:"PIM",c:{es:"Exportación",en:"Export"},n:{es:"Formato de importación PIM",en:"PIM import format"},m:{es:"listo",en:"ready"}}
+   ]},
+  {project:"cost",tab:{es:"Costes",en:"Costs"},name:"supplier-cost-request",
+   result:{es:"~300 correos con 2 adjuntos listos para revisión",en:"~300 emails with 2 attachments ready for review"},
+   steps:[
+     {k:"trigger",ic:"▶",c:{es:"Disparador",en:"Trigger"},n:{es:"Campaña anual de costes",en:"Annual cost campaign"},m:{es:"manual",en:"manual"}},
+     {k:"data",ic:"XLS",c:{es:"SharePoint",en:"SharePoint"},n:{es:"Leer catálogo maestro",en:"Read master catalog"},m:{es:"~40.000 filas",en:"~40,000 rows"}},
+     {k:"script",ic:"TS",c:{es:"Office Script",en:"Office Script"},n:{es:"Extraer productos por proveedor",en:"Extract products per supplier"},m:{es:"~300 grupos",en:"~300 groups"}},
+     {k:"script",ic:"TS",c:{es:"Office Script",en:"Office Script"},n:{es:"Generar Excel de tarifas",en:"Generate price files"},m:{es:"~300 ficheros",en:"~300 files"}},
+     {k:"mail",ic:"@",c:{es:"Outlook",en:"Outlook"},n:{es:"Borrador en buzón compartido",en:"Draft in shared mailbox"},m:{es:"2 adjuntos",en:"2 attachments"}},
+     {k:"data",ic:"✓",c:{es:"Revisión",en:"Review"},n:{es:"Validación humana antes de enviar",en:"Human check before sending"},m:{es:"pendiente",en:"pending"}}
+   ]},
+  {project:"comp",tab:{es:"Compliance",en:"Compliance"},name:"supplier-compliance-mailing",
+   result:{es:"solo se generan los ficheros con datos",en:"only files with data are generated"},
+   steps:[
+     {k:"trigger",ic:"▶",c:{es:"Disparador",en:"Trigger"},n:{es:"Envío de documentación",en:"Documentation mailing"},m:{es:"manual",en:"manual"}},
+     {k:"data",ic:"DB",c:{es:"SharePoint",en:"SharePoint"},n:{es:"Leer BD de producto y de envase",en:"Read product and packaging DBs"},m:{es:"2 bases",en:"2 databases"}},
+     {k:"script",ic:"TS",c:{es:"Office Script",en:"Office Script"},n:{es:"Cruzar por proveedor",en:"Join per supplier"},m:{es:"join",en:"join"}},
+     {k:"script",ic:"if",c:{es:"Condición",en:"Condition"},n:{es:"¿Tiene datos? Generar fichero",en:"Has data? Generate file"},m:{es:"1–2 adjuntos",en:"1–2 attachments"}},
+     {k:"mail",ic:"@",c:{es:"Outlook",en:"Outlook"},n:{es:"Correo bilingüe",en:"Bilingual email"},m:{es:"ES / EN",en:"ES / EN"}}
+   ]},
+  {project:"invoice",tab:{es:"Facturas",en:"Invoices"},name:"invoice-classifier",
+   result:{es:"700 facturas/mes sin intervención",en:"700 invoices/month with no manual work"},
+   steps:[
+     {k:"trigger",ic:"⏱",c:{es:"Trigger",en:"Trigger"},n:{es:"Revisión de bandeja",en:"Inbox check"},m:{es:"cada 15 min",en:"every 15 min"}},
+     {k:"data",ic:"GM",c:{es:"Gmail API",en:"Gmail API"},n:{es:"Emails con PDF o XML",en:"Emails with PDF or XML"},m:{es:"nuevos",en:"new"}},
+     {k:"script",ic:"JS",c:{es:"Apps Script",en:"Apps Script"},n:{es:"Scoring multi-señal",en:"Multi-signal scoring"},m:{es:"5 capas",en:"5 layers"}},
+     {k:"script",ic:"OCR",c:{es:"Drive OCR",en:"Drive OCR"},n:{es:"OCR bilingüe ES / CA",en:"Bilingual OCR ES / CA"},m:{es:"fallback",en:"fallback"}},
+     {k:"mail",ic:"✓",c:{es:"Gmail",en:"Gmail"},n:{es:"Etiqueta FRA PROV y archivo",en:"Label FRA PROV and archive"},m:{es:"0 manual",en:"0 manual"}}
+   ]}
+];
 
+const $ = id => document.getElementById(id);
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const t = k => T[lang][k] ?? k;
+let lang = "es";
+try { lang = localStorage.getItem("bf-lang") || (navigator.language || "es").slice(0,2); } catch(e){}
+if(!T[lang]) lang = "es";
+let filter = "all";
+
+// ── i18n ──
 function applyLang(){
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if(T[lang][key] !== undefined) el.innerHTML = T[lang][key];
-  });
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => { const v = T[lang][el.dataset.i18n]; if(v !== undefined) el.innerHTML = v; });
+  $("langBtn").innerHTML = lang === "es" ? "<b>ES</b> · EN" : "ES · <b>EN</b>";
+  document.querySelectorAll(".cv-link").forEach(a => a.href = "cv/CV_Brenda_Fabri_" + lang.toUpperCase() + ".pdf");
+  renderFilters(); renderProjects(); tabs(); restartFlow();
 }
-
-// ── SCROLL ANIMATIONS ──
-const observer = new IntersectionObserver(entries => {
-  entries.forEach((e,i) => {
-    if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('visible'), i * 60);
-      observer.unobserve(e.target);
-    }
-  });
-},{threshold:.1});
-document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
-
-// ── SMOOTH SCROLL FIX ──
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    e.preventDefault();
-    const id = a.getAttribute('href').slice(1);
-    const target = document.getElementById(id);
-    if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
-  });
+$("langBtn").addEventListener("click", () => {
+  lang = lang === "es" ? "en" : "es";
+  try { localStorage.setItem("bf-lang", lang); } catch(e){}
+  applyLang();
 });
 
-// ── INIT ──
-if(lang === 'en'){
-  document.getElementById('langBtn').textContent = 'ES';
-  applyLang();
-  document.documentElement.lang = 'en';
+// ── PROJECTS + FILTERS ──
+function renderFilters(){
+  const cats = ["all","auto","bi","demo","doc"];
+  $("filters").innerHTML = cats.map(c => {
+    const n = c === "all" ? PROJECTS.length : PROJECTS.filter(p => p.cat === c).length;
+    return `<button class="filt" type="button" data-cat="${c}" aria-pressed="${c===filter}">${t(c==="all"?"f.all":CAT_LABEL[c])}<span class="n">${n}</span></button>`;
+  }).join("");
+  $("filters").querySelectorAll(".filt").forEach(b => b.addEventListener("click", () => { filter = b.dataset.cat; renderFilters(); renderProjects(); }));
 }
+function linkHtml(l){
+  if(l.k === "private") return `<span>${t("l.private")}</span>`;
+  if(l.k === "internal") return `<span>${t("l.internal")}</span>`;
+  return `<a href="${l.u}" target="_blank" rel="noopener">${t("l."+l.k)}</a>`;
+}
+function renderProjects(){
+  $("projGrid").innerHTML = PROJECTS.filter(p => filter === "all" || p.cat === filter).map(p => {
+    const c = p[lang], org = p.org.split("|")[lang === "es" ? 0 : 1] || p.org;
+    return `<article class="card" id="p-${p.id}">
+      <div class="card-top"><span class="cat ${p.cat}">${t(CAT_LABEL[p.cat])}</span><span class="org">${org}</span></div>
+      <h3>${c.t}</h3>
+      <p>${c.d}</p>
+      <div class="metrics">${c.m.map(x => `<span>${x}</span>`).join("")}</div>
+      <div class="tags">${p.tags.map(x => `<span class="tag">${x}</span>`).join("")}</div>
+      <div class="card-link">${linkHtml(p.link)}</div>
+    </article>`;
+  }).join("");
+}
+
+// ── LIVE RUN PANEL ──
+let cur = 0, timer = null, runNo = 418, auto = true;
+const pad = n => String(n).padStart(4,"0");
+function tabs(){
+  $("tabs").innerHTML = FLOWS.map((f,i) => `<button class="tab" type="button" role="tab" aria-selected="${i===cur}">${f.tab[lang]}</button>`).join("");
+  [...$("tabs").children].forEach((b,i) => b.addEventListener("click", () => { auto = false; select(i); }));
+}
+function renderFlow(f, done){
+  $("flow").innerHTML = f.steps.map(s => `
+    <li class="step ${done?"ok":"wait"}" data-kind="${s.k}">
+      <span class="pkt"></span>
+      <span class="node" aria-hidden="true">${s.ic}</span>
+      <span class="s-body"><span class="s-conn">${s.c[lang]}</span><span class="s-name">${s.n[lang]}</span></span>
+      <span class="s-meta">${done?"✓ ":""}${s.m[lang]}</span>
+    </li>`).join("");
+  [...$("flow").children].forEach(li => li.style.setProperty("--h", li.offsetHeight + "px"));
+}
+function header(f, done){
+  $("runId").textContent = "#" + pad(runNo);
+  $("runName").textContent = f.name;
+  $("runState").textContent = t(done ? "run.done" : "run.running");
+  $("runState").classList.toggle("done", done);
+  $("runResult").innerHTML = t("run.result") + ": <b>" + f.result[lang] + "</b>";
+  $("runLink").href = "#p-" + f.project;
+}
+const ts = () => new Date().toTimeString().slice(0,8);
+function log(html){
+  const c = $("console"), d = document.createElement("div");
+  d.innerHTML = html; c.appendChild(d);
+  while(c.children.length > 8) c.firstChild.remove();
+}
+function markTabs(){ [...$("tabs").children].forEach((b,j) => b.setAttribute("aria-selected", j === cur)); }
+function select(i){ clearTimeout(timer); cur = i; runNo++; markTabs(); play(); }
+function restartFlow(){ clearTimeout(timer); $("console").innerHTML = ""; play(); }
+function play(){
+  const f = FLOWS[cur];
+  if(reduce){
+    renderFlow(f, true); header(f, true); $("console").innerHTML = "";
+    f.steps.forEach(s => log(`<span class="ok">✓</span> ${s.n[lang]} <span class="t">· ${s.m[lang]}</span>`));
+    log(`<span class="sum">→ ${f.result[lang]}</span>`);
+    return;
+  }
+  renderFlow(f, false); header(f, false);
+  log(`<span class="t">${ts()}</span> run #${pad(runNo)} ${f.name} ${t("run.started")}`);
+  const lis = [...$("flow").children]; let i = 0;
+  const next = () => {
+    if(i > 0){
+      const p = lis[i-1], s = f.steps[i-1];
+      p.classList.remove("running"); p.classList.add("ok");
+      p.querySelector(".s-meta").textContent = "✓ " + s.m[lang];
+      log(`<span class="t">${ts()}</span> <span class="ok">✓</span> ${s.n[lang]} <span class="t">· ${s.m[lang]}</span>`);
+      if(i < lis.length) p.classList.add("flowing");
+    }
+    if(i < lis.length){ lis[i].classList.remove("wait"); lis[i].classList.add("running"); i++; timer = setTimeout(next, 950); }
+    else {
+      header(f, true);
+      log(`<span class="t">${ts()}</span> <span class="sum">→ ${f.result[lang]}</span>`);
+      timer = setTimeout(() => { if(auto){ cur = (cur + 1) % FLOWS.length; markTabs(); } runNo++; play(); }, 3200);
+    }
+  };
+  timer = setTimeout(next, 500);
+}
+// Pause the loop when the tab is hidden
+document.addEventListener("visibilitychange", () => { if(document.hidden) clearTimeout(timer); else restartFlow(); });
+
+// ── IMPACT COUNTERS ── (values are already visible; this only replays the count-up)
+function counters(){
+  if(reduce || !("IntersectionObserver" in window)) return;
+  document.querySelectorAll(".kpi-val").forEach(el => {
+    const to = +el.dataset.to, pre = el.dataset.prefix || "", suf = el.dataset.suffix || "", unit = el.dataset.unit;
+    const paint = v => { el.innerHTML = pre + v.toLocaleString(lang === "es" ? "es-ES" : "en-US") + suf + (unit ? `<small>${unit}</small>` : ""); };
+    const io = new IntersectionObserver(es => {
+      if(!es[0].isIntersecting) return; io.disconnect();
+      const t0 = performance.now(), d = 1400;
+      const step = now => { const p = Math.min(1, (now - t0) / d); paint(Math.round(to * (1 - Math.pow(1 - p, 3)))); if(p < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    }, {threshold:.4});
+    io.observe(el);
+  });
+}
+
+applyLang();
+counters();
 </script>
 </body>
 </html>
