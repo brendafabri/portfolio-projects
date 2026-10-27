@@ -160,6 +160,8 @@ h2{font-size:clamp(30px,4vw,42px);letter-spacing:-.02em;line-height:1.1;margin:0
 .side ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
 .side li{font-size:15px}
 .side li span{display:block;color:var(--mid);font-size:13.5px}
+.side li a{color:var(--teal);text-decoration:none}
+.side li a:hover{text-decoration:underline}
 .langs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .lv{border:1px solid var(--bd);border-radius:10px;padding:10px 12px;background:var(--s1)}
 .lv b{display:block;font-size:14px;font-weight:600}
@@ -318,6 +320,7 @@ footer .mono{font-family:var(--f-mono);font-size:12px}
         <ul>
           <li data-i18n="edu.1">Máster en Transformación Digital<span>Business School IOE · 2025</span></li>
           <li data-i18n="edu.2">Licenciatura en Administración de Empresas<span>Universidad Nacional de Cuyo · 2016</span></li>
+          <li data-i18n="edu.4">Microsoft Certified: Azure AI Fundamentals (AI-901)<span>Microsoft · 2026 · 933/1000 · <a href="https://lnkd.in/ejZfxWiZ" target="_blank" rel="noopener">Ver credencial ↗</a></span></li>
           <li data-i18n="edu.3">Certificaciones<span>IA Generativa Aplicada · Data Analyst &amp; Power BI · SCRUM · JavaScript &amp; React</span></li>
         </ul>
       </div>
@@ -356,7 +359,7 @@ footer .mono{font-family:var(--f-mono);font-size:12px}
   <div class="stack">
     <div class="sg"><h3 data-i18n="stack.auto">Automatización</h3><div class="chips"><span class="chip hi">Power Automate</span><span class="chip hi">Power Apps</span><span class="chip hi">Office Scripts</span><span class="chip hi">UiPath</span><span class="chip hi">Google Apps Script</span><span class="chip">n8n</span><span class="chip">Make / Zapier</span></div></div>
     <div class="sg"><h3>Microsoft 365</h3><div class="chips"><span class="chip hi">SharePoint</span><span class="chip hi">Outlook</span><span class="chip hi">Excel avanzado</span><span class="chip hi">Teams</span><span class="chip hi">OneDrive</span><span class="chip hi">Power Platform</span></div></div>
-    <div class="sg"><h3 data-i18n="stack.ai">IA y LLMs</h3><div class="chips"><span class="chip hi">LLMs / RAG</span><span class="chip">Prompt Engineering</span><span class="chip">OpenAI / Claude</span><span class="chip">OCR</span></div></div>
+    <div class="sg"><h3 data-i18n="stack.ai">IA y LLMs</h3><div class="chips"><span class="chip hi">LLMs / RAG</span><span class="chip">Prompt Engineering</span><span class="chip">Microsoft Foundry</span><span class="chip">OpenAI / Claude</span><span class="chip">OCR</span></div></div>
     <div class="sg"><h3 data-i18n="stack.bi">Datos y BI</h3><div class="chips"><span class="chip hi">Power BI</span><span class="chip">DAX</span><span class="chip">SQL</span><span class="chip">Looker Studio</span><span class="chip">Modelado de datos</span></div></div>
     <div class="sg"><h3 data-i18n="stack.dev">Desarrollo</h3><div class="chips"><span class="chip hi">TypeScript</span><span class="chip hi">JavaScript</span><span class="chip">HTML / CSS</span><span class="chip">React</span><span class="chip">APIs REST</span><span class="chip">Webhooks</span></div></div>
     <div class="sg"><h3 data-i18n="stack.ba">Business Analysis</h3><div class="chips"><span class="chip hi">BPMN</span><span class="chip hi">AS-IS / TO-BE</span><span class="chip">Agile / Scrum</span><span class="chip">SAP SD/FI</span><span class="chip">Dynamics 365</span><span class="chip">Jira / Confluence</span></div></div>
@@ -406,7 +409,7 @@ const T = {
     "xp.2.d":"2024 → hoy","xp.2.t":"Co-Fundadora y Consultora Principal","xp.2.p":"Consultora de automatización con IA para empresas medianas que quieren escalar operaciones sin aumentar equipo, con cumplimiento RGPD desde el diseño.",
     "xp.3.d":"2025 → jun 2026","xp.3.p":"Clasificador de facturas con OCR bilingüe, avisos de festivos a 500+ proveedores, control de horas de 56 personas, dashboards Power BI e integración de IA generativa.",
     "xp.4.p":"Rediseño de procesos con un 75% menos de errores operativos, automatización Excel/VBA, KPIs para Volkswagen, Nissan y Chevrolet, y un equipo directo de 5+ personas.",
-    "edu.t":"Formación","edu.1":"Máster en Transformación Digital<span>Business School IOE · 2025</span>","edu.2":"Licenciatura en Administración de Empresas<span>Universidad Nacional de Cuyo · 2016</span>","edu.3":"Certificaciones<span>IA Generativa Aplicada · Data Analyst &amp; Power BI · SCRUM · JavaScript &amp; React</span>",
+    "edu.t":"Formación","edu.1":"Máster en Transformación Digital<span>Business School IOE · 2025</span>","edu.2":"Licenciatura en Administración de Empresas<span>Universidad Nacional de Cuyo · 2016</span>","edu.4":"Microsoft Certified: Azure AI Fundamentals (AI-901)<span>Microsoft · 2026 · 933/1000 · <a href=\"https://lnkd.in/ejZfxWiZ\" target=\"_blank\" rel=\"noopener\">Ver credencial ↗</a></span>","edu.3":"Certificaciones<span>IA Generativa Aplicada · Data Analyst &amp; Power BI · SCRUM · JavaScript &amp; React</span>",
     "lang.t":"Idiomas","lang.es":"Español","lang.en":"Inglés","lang.it":"Italiano","lang.ca":"Catalán","lang.native":"Nativo",
     "cv.p":"CV completo en PDF, dos páginas.",
     "proj.tag":"Proyectos","proj.title":"Proyectos reales en producción","proj.lead":"Automatizaciones, dashboards y herramientas construidas para resolver problemas de negocio reales, con métricas de impacto documentadas.",
@@ -432,7 +435,7 @@ const T = {
     "xp.2.d":"2024 → now","xp.2.t":"Co-Founder &amp; Lead Consultant","xp.2.p":"AI automation consultancy for mid-sized companies that want to scale operations without growing headcount, GDPR-compliant by design.",
     "xp.3.d":"2025 → Jun 2026","xp.3.p":"Invoice classifier with bilingual OCR, holiday notices to 500+ suppliers, hours control for 56 people, Power BI dashboards and generative AI integration.",
     "xp.4.p":"Process redesign with 75% fewer operational errors, Excel/VBA automation, KPIs for Volkswagen, Nissan and Chevrolet, and a direct team of 5+.",
-    "edu.t":"Education","edu.1":"Master's in Digital Transformation<span>Business School IOE · 2025</span>","edu.2":"Bachelor's in Business Administration<span>Universidad Nacional de Cuyo · 2016</span>","edu.3":"Certifications<span>Applied Generative AI · Data Analyst &amp; Power BI · SCRUM · JavaScript &amp; React</span>",
+    "edu.t":"Education","edu.1":"Master's in Digital Transformation<span>Business School IOE · 2025</span>","edu.2":"Bachelor's in Business Administration<span>Universidad Nacional de Cuyo · 2016</span>","edu.4":"Microsoft Certified: Azure AI Fundamentals (AI-901)<span>Microsoft · 2026 · 933/1000 · <a href=\"https://lnkd.in/ejZfxWiZ\" target=\"_blank\" rel=\"noopener\">View credential ↗</a></span>","edu.3":"Certifications<span>Applied Generative AI · Data Analyst &amp; Power BI · SCRUM · JavaScript &amp; React</span>",
     "lang.t":"Languages","lang.es":"Spanish","lang.en":"English","lang.it":"Italian","lang.ca":"Catalan","lang.native":"Native",
     "cv.p":"Full two-page CV in PDF.",
     "proj.tag":"Projects","proj.title":"Real projects in production","proj.lead":"Automations, dashboards and tools built to solve real business problems, with documented impact metrics.",
