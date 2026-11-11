@@ -73,6 +73,7 @@ h1{font-size:clamp(44px,7vw,76px);line-height:.98;letter-spacing:-.03em;font-wei
 .aud{border-top:1px solid var(--bd2);padding-top:12px}
 .aud h3{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 6px;font-weight:500}
 .aud p{margin:0;font-size:14px;color:var(--mid)}
+.aud p + p{margin-top:8px;color:var(--text)}
 
 /* RUN PANEL */
 .run{background:linear-gradient(180deg,var(--s1),var(--bg));border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;box-shadow:0 30px 80px -40px rgba(0,201,168,.25)}
@@ -249,20 +250,20 @@ footer .mono{font-family:var(--f-mono);font-size:12px}
   <div>
     <span class="status"><i></i><span data-i18n="hero.status">Process Optimization &amp; Automation · Barcelona</span></span>
     <h1>Brenda Fabri</h1>
-    <p class="role"><b>Process Optimization &amp; Automation Specialist</b> · Senior Business Analyst</p>
-    <p class="pitch" data-i18n="hero.pitch">Convierto procesos manuales en flujos que corren solos, con métricas de impacto medibles.</p>
+    <p class="role" data-i18n="hero.role"><b>Rediseño de procesos y entrega de IA</b> · Senior Business Analyst</p>
+    <p class="pitch" data-i18n="hero.pitch">Rediseño procesos con automatización e IA: analizo cómo fluye el trabajo, detecto fricción y handoffs manuales, y entrego la solución hasta producción con impacto medido.</p>
     <p class="pitch-sub" data-i18n="hero.sub">Más de 7 años entre análisis de negocio y automatización: Power Automate, Power Apps, Office Scripts, UiPath, Apps Script e IA aplicada. El panel reproduce flujos reales que tengo en producción.</p>
     <div class="ctas">
       <a class="btn primary cv-link" href="cv/CV_Brenda_Fabri_ES.pdf" target="_blank" rel="noopener" data-i18n="hero.cv">Descargar CV ↓</a>
       <a class="btn" href="#contacto" data-i18n="hero.talk">Hablemos de un proyecto</a>
     </div>
     <div class="audience">
-      <div class="aud"><h3 data-i18n="aud.hire.t">Para equipos que contratan</h3><p data-i18n="aud.hire.p">Perfil BA + automatización en Microsoft 365 y Google Workspace, con experiencia en entornos multinacionales.</p></div>
+      <div class="aud"><h3 data-i18n="aud.hire.t">Para equipos que contratan</h3><p data-i18n="aud.hire.p">Perfil BA + automatización en Microsoft 365 y Google Workspace, con experiencia en entornos multinacionales.</p><p data-i18n="aud.how">Cómo trabajo: mapeo el proceso → identifico fricción → priorizo por impacto → entrego → mido tiempo ahorrado y errores evitados → itero con los usuarios.</p></div>
       <div class="aud"><h3 data-i18n="aud.biz.t">Para empresas · ATNIA</h3><p data-i18n="aud.biz.p">Diagnóstico y automatización end-to-end para pymes, con cumplimiento RGPD desde el diseño.</p></div>
     </div>
   </div>
 
-  <div class="run" role="region" aria-label="Ejecución simulada de un flujo de automatización">
+  <div class="run" role="region" id="runPanel" aria-label="Ejecución simulada de un flujo de automatización">
     <div class="run-head">
       <div class="run-title">run <b id="runId">#0418</b> · <span id="runName">supplier-sustainability-assessments</span></div>
       <span class="run-state" id="runState">completado</span>
@@ -358,11 +359,11 @@ footer .mono{font-family:var(--f-mono);font-size:12px}
   <p class="lead" data-i18n="stack.lead">En verde, lo que uso a diario en producción.</p>
   <div class="stack">
     <div class="sg"><h3 data-i18n="stack.auto">Automatización</h3><div class="chips"><span class="chip hi">Power Automate</span><span class="chip hi">Power Apps</span><span class="chip hi">Office Scripts</span><span class="chip hi">UiPath</span><span class="chip hi">Google Apps Script</span><span class="chip">n8n</span><span class="chip">Make / Zapier</span></div></div>
-    <div class="sg"><h3>Microsoft 365</h3><div class="chips"><span class="chip hi">SharePoint</span><span class="chip hi">Outlook</span><span class="chip hi">Excel avanzado</span><span class="chip hi">Teams</span><span class="chip hi">OneDrive</span><span class="chip hi">Power Platform</span></div></div>
-    <div class="sg"><h3 data-i18n="stack.ai">IA y LLMs</h3><div class="chips"><span class="chip hi">LLMs / RAG</span><span class="chip">Prompt Engineering</span><span class="chip">Microsoft Foundry</span><span class="chip">OpenAI / Claude</span><span class="chip">OCR</span></div></div>
-    <div class="sg"><h3 data-i18n="stack.bi">Datos y BI</h3><div class="chips"><span class="chip hi">Power BI</span><span class="chip">DAX</span><span class="chip">SQL</span><span class="chip">Looker Studio</span><span class="chip">Modelado de datos</span></div></div>
+    <div class="sg"><h3>Microsoft 365</h3><div class="chips"><span class="chip hi">SharePoint</span><span class="chip hi">Outlook</span><span class="chip hi" data-i18n="chip.excel">Excel avanzado</span><span class="chip hi">Teams</span><span class="chip hi">OneDrive</span><span class="chip hi">Power Platform</span></div></div>
+    <div class="sg"><h3 data-i18n="stack.ai">IA y LLMs</h3><div class="chips"><span class="chip hi">LLMs / RAG</span><span class="chip">Prompt Engineering</span><span class="chip">Microsoft Foundry</span><span class="chip">OpenAI / Claude</span><span class="chip">OCR</span><span class="chip" data-i18n="chip.convai">Diseño de IA conversacional (intents, fallback, grounding)</span><span class="chip" data-i18n="chip.sf">Salesforce — en formación (Trailhead: Agentforce, Flow, AI Associate)</span></div></div>
+    <div class="sg"><h3 data-i18n="stack.bi">Datos y BI</h3><div class="chips"><span class="chip hi">Power BI</span><span class="chip">DAX</span><span class="chip">SQL</span><span class="chip">Looker Studio</span><span class="chip" data-i18n="chip.model">Modelado de datos</span></div></div>
     <div class="sg"><h3 data-i18n="stack.dev">Desarrollo</h3><div class="chips"><span class="chip hi">TypeScript</span><span class="chip hi">JavaScript</span><span class="chip">HTML / CSS</span><span class="chip">React</span><span class="chip">APIs REST</span><span class="chip">Webhooks</span></div></div>
-    <div class="sg"><h3 data-i18n="stack.ba">Business Analysis</h3><div class="chips"><span class="chip hi">BPMN</span><span class="chip hi">AS-IS / TO-BE</span><span class="chip">Agile / Scrum</span><span class="chip">SAP SD/FI</span><span class="chip">Dynamics 365</span><span class="chip">Jira / Confluence</span></div></div>
+    <div class="sg"><h3 data-i18n="stack.ba">Business Analysis</h3><div class="chips"><span class="chip hi">BPMN</span><span class="chip hi">AS-IS / TO-BE</span><span class="chip">Agile / Scrum</span><span class="chip">SAP SD/FI</span><span class="chip">Dynamics 365</span><span class="chip">Jira / Confluence</span><span class="chip">Process mapping</span><span class="chip">Friction &amp; handoff analysis</span><span class="chip">UAT</span><span class="chip" data-i18n="chip.workshops">Workshops con negocio</span><span class="chip" data-i18n="chip.change">Change management / adopción</span></div></div>
   </div>
 </section>
 
@@ -396,10 +397,11 @@ const T = {
   es:{
     "nav.impact":"Impacto","nav.xp":"Experiencia","nav.projects":"Proyectos","nav.stack":"Stack","nav.contact":"Contacto",
     "hero.status":"Process Optimization &amp; Automation · Barcelona",
-    "hero.pitch":"Convierto procesos manuales en flujos que corren solos, con métricas de impacto medibles.",
+    "hero.role":"<b>Rediseño de procesos y entrega de IA</b> · Senior Business Analyst",
+    "hero.pitch":"Rediseño procesos con automatización e IA: analizo cómo fluye el trabajo, detecto fricción y handoffs manuales, y entrego la solución hasta producción con impacto medido.",
     "hero.sub":"Más de 7 años entre análisis de negocio y automatización: Power Automate, Power Apps, Office Scripts, UiPath, Apps Script e IA aplicada. El panel reproduce flujos reales que tengo en producción.",
     "hero.cv":"Descargar CV ↓","hero.talk":"Hablemos de un proyecto",
-    "aud.hire.t":"Para equipos que contratan","aud.hire.p":"Perfil BA + automatización en Microsoft 365 y Google Workspace, con experiencia en entornos multinacionales.",
+    "aud.hire.t":"Para equipos que contratan","aud.hire.p":"Perfil BA + automatización en Microsoft 365 y Google Workspace, con experiencia en entornos multinacionales.","aud.how":"Cómo trabajo: mapeo el proceso → identifico fricción → priorizo por impacto → entrego → mido tiempo ahorrado y errores evitados → itero con los usuarios.",
     "aud.biz.t":"Para empresas · ATNIA","aud.biz.p":"Diagnóstico y automatización end-to-end para pymes, con cumplimiento RGPD desde el diseño.",
     "run.case":"Ver proyecto →","run.result":"Resultado","run.running":"ejecutando","run.done":"completado","run.started":"iniciado",
     "kpi.1":"emails clasificados sin intervención","kpi.2":"de trabajo manual eliminadas al año","kpi.3":"filas procesadas por campaña de costes","kpi.4":"persona-días eliminados por ciclo",
@@ -416,16 +418,19 @@ const T = {
     "f.all":"Todos","f.auto":"Automatización","f.app":"Apps","f.bi":"Business Intelligence","f.demo":"Demo","f.doc":"Documentación",
     "l.github":"GitHub ↗","l.demo":"Ver demo ↗","l.atnia":"Ver en ATNIA ↗","l.private":"Producción privada","l.internal":"Uso interno",
     "stack.tag":"Stack técnico","stack.title":"Herramientas y tecnologías","stack.lead":"En verde, lo que uso a diario en producción.",
+    "chip.workshops":"Workshops con negocio","chip.change":"Change management / adopción","chip.convai":"Diseño de IA conversacional (intents, fallback, grounding)","chip.sf":"Salesforce — en formación (Trailhead: Agentforce, Flow, AI Associate)","chip.excel":"Excel avanzado","chip.model":"Modelado de datos",
     "stack.auto":"Automatización","stack.ai":"IA y LLMs","stack.bi":"Datos y BI","stack.dev":"Desarrollo","stack.ba":"Business Analysis",
+    "aria.run":"Ejecución simulada de un flujo de automatización","aria.filters":"Filtrar proyectos",
     "contact.tag":"Contacto","contact.title":"Hablemos","contact.lead":"¿Buscás un perfil de automatización para tu equipo, o tu empresa pierde horas en procesos manuales? Escribime."
   },
   en:{
     "nav.impact":"Impact","nav.xp":"Experience","nav.projects":"Projects","nav.stack":"Stack","nav.contact":"Contact",
     "hero.status":"Process Optimization &amp; Automation · Barcelona",
-    "hero.pitch":"I turn manual processes into flows that run on their own, with measurable impact.",
+    "hero.role":"<b>Process &amp; AI Delivery</b> · Senior Business Analyst",
+    "hero.pitch":"I redesign processes with automation and AI: I analyze how work actually flows, spot friction and manual handoffs, and deliver the solution all the way to production with measured impact.",
     "hero.sub":"7+ years across business analysis and automation: Power Automate, Power Apps, Office Scripts, UiPath, Apps Script and applied AI. The panel replays real flows I run in production.",
     "hero.cv":"Download CV ↓","hero.talk":"Discuss a project",
-    "aud.hire.t":"For hiring teams","aud.hire.p":"BA + automation profile across Microsoft 365 and Google Workspace, with experience in multinational environments.",
+    "aud.hire.t":"For hiring teams","aud.hire.p":"BA + automation profile across Microsoft 365 and Google Workspace, with experience in multinational environments.","aud.how":"How I work: map the process → identify friction → prioritize by impact → deliver → measure time saved and errors avoided → iterate with users.",
     "aud.biz.t":"For companies · ATNIA","aud.biz.p":"End-to-end process diagnosis and automation for SMBs, GDPR-compliant by design.",
     "run.case":"See project →","run.result":"Result","run.running":"running","run.done":"completed","run.started":"started",
     "kpi.1":"emails classified with no manual work","kpi.2":"of manual work eliminated per year","kpi.3":"rows processed per cost campaign","kpi.4":"person-days eliminated per cycle",
@@ -442,7 +447,9 @@ const T = {
     "f.all":"All","f.auto":"Automation","f.app":"Apps","f.bi":"Business Intelligence","f.demo":"Demo","f.doc":"Documentation",
     "l.github":"GitHub ↗","l.demo":"View demo ↗","l.atnia":"View on ATNIA ↗","l.private":"Private production","l.internal":"Internal use",
     "stack.tag":"Tech stack","stack.title":"Tools and technologies","stack.lead":"Highlighted: what I use daily in production.",
+    "chip.workshops":"Business workshops","chip.change":"Change management / adoption","chip.convai":"Conversational AI design (intents, fallback, grounding)","chip.sf":"Salesforce — in training (Trailhead: Agentforce, Flow, AI Associate)","chip.excel":"Advanced Excel","chip.model":"Data modeling",
     "stack.auto":"Automation","stack.ai":"AI and LLMs","stack.bi":"Data and BI","stack.dev":"Development","stack.ba":"Business Analysis",
+    "aria.run":"Simulated run of an automation flow","aria.filters":"Filter projects",
     "contact.tag":"Contact","contact.title":"Let's talk","contact.lead":"Looking for an automation profile for your team, or is your company losing hours on manual processes? Get in touch."
   }
 };
@@ -452,16 +459,16 @@ const GH = "https://github.com/brendafabri/portfolio-projects/tree/main/";
 const SITE = "https://brendafabri.github.io/portfolio-projects/";
 const PROJECTS = [
   {id:"invoice",cat:"auto",org:"Diplonautic",
-   es:{t:"Invoice Classifier",d:"Motor de clasificación inteligente de facturas en Gmail. 5 capas de detección: análisis de asunto, scoring multi-señal, parser XML, OCR bilingüe (ES/CA) y fast-path.",m:["18.000+ emails clasificados","700 facturas/mes","0 intervención humana"]},
-   en:{t:"Invoice Classifier",d:"Intelligent invoice classification engine for Gmail. 5 detection layers: subject analysis, multi-signal scoring, XML parser, bilingual OCR (ES/CA) and fast-path.",m:["18,000+ emails classified","700 invoices/month","0 human intervention"]},
+   es:{t:"Invoice Classifier",d:"Clasificación y enrutado inteligente de documentos entrantes en Gmail: 5 capas de detección (asunto, scoring multi-señal, parser XML, OCR bilingüe ES/CA y fast-path) deciden qué es una factura y la etiquetan y archivan sola. Elimina el triage manual de la bandeja.",m:["18.000+ emails clasificados","700 facturas/mes","0 intervención humana"]},
+   en:{t:"Invoice Classifier",d:"Intelligent classification and routing of incoming documents in Gmail: 5 detection layers (subject, multi-signal scoring, XML parser, bilingual ES/CA OCR and fast-path) decide what is an invoice, then label and archive it automatically. Removes manual inbox triage.",m:["18,000+ emails classified","700 invoices/month","0 human intervention"]},
    tags:["Google Apps Script","Gmail API","OCR","NLP"],link:{k:"github",u:GH+"invoice-classifier"}},
   {id:"festivos",cat:"auto",org:"Diplonautic",
-   es:{t:"Aviso de Festivos a Proveedores",d:"Flujo Power Automate que detecta festivos 5 días antes y notifica automáticamente a 500+ proveedores con email personalizado y firma corporativa. Incluye deduplicación y log automático.",m:["7.000+ emails/año","350 h/año eliminadas","0 duplicados"]},
-   en:{t:"Supplier Holiday Notices",d:"Power Automate flow that detects holidays 5 days ahead and notifies 500+ suppliers with a personalized email and corporate signature. Includes deduplication and an automatic log.",m:["7,000+ emails/year","350 h/year eliminated","0 duplicates"]},
+   es:{t:"Aviso de Festivos a Proveedores",d:"Touchpoint automatizado con terceros: un flujo de Power Automate detecta festivos 5 días antes y avisa a 500+ proveedores con email personalizado, deduplicación y log. Elimina un handoff manual recurrente.",m:["7.000+ emails/año","350 h/año eliminadas","0 duplicados"]},
+   en:{t:"Supplier Holiday Notices",d:"Automated third-party touchpoint: a Power Automate flow detects holidays 5 days ahead and notifies 500+ suppliers with a personalized email, deduplication and a log. Removes a recurring manual handoff.",m:["7,000+ emails/year","350 h/year eliminated","0 duplicates"]},
    tags:["Power Automate","Outlook","SharePoint","Excel"],link:{k:"demo",u:SITE+"flujo-aviso-festivos-proveedores.html"}},
   {id:"hr",cat:"bi",org:"Diplonautic",
-   es:{t:"Control Automatizado de Horas HR",d:"Sistema Excel que cruza 5 fuentes de datos (ERP, vacaciones, correcciones, desplazamientos y configuración) para generar la auditoría mensual de horas de 56 trabajadores.",m:["3 días/mes eliminados","36 días/año","56 trabajadores"]},
-   en:{t:"Automated HR Hours Control",d:"Excel system that crosses 5 data sources (ERP, vacations, corrections, travel and config) to generate the monthly hours audit for 56 workers.",m:["3 days/month eliminated","36 days/year","56 workers"]},
+   es:{t:"Control Automatizado de Horas HR",d:"Reducción de carga cognitiva: la auditoría mensual de horas de 56 trabajadores, que antes requería cruzar 5 fuentes a mano (ERP, vacaciones, correcciones, desplazamientos y configuración), ahora se genera sola en Excel.",m:["3 días/mes eliminados","36 días/año","56 trabajadores"]},
+   en:{t:"Automated HR Hours Control",d:"Cognitive load reduction: the monthly hours audit for 56 workers, which used to require cross-checking 5 sources by hand (ERP, vacations, corrections, travel and config), is now generated automatically in Excel.",m:["3 days/month eliminated","36 days/year","56 workers"]},
    tags:["Excel avanzado","Fórmulas dinámicas","5 fuentes"],link:{k:"private"}},
   {id:"step",cat:"auto",org:"Diplonautic",
    es:{t:"Inventario STEP → Sheets",d:"Script que lee carpetas de Google Drive con archivos STEP, parsea los nombres con regex para extraer piezas, unidades y tipos de rosca, y genera un inventario formateado.",m:["Inventario 100% automatizado","0 entrada manual"]},
@@ -472,20 +479,20 @@ const PROJECTS = [
    en:{t:"Article Registration Form",d:"Web app embedded in Google Sheets for registering nautical parts in the catalog. Loads fields dynamically, searches 300+ hierarchical families and validates before saving.",m:["23 standardized fields","300+ families","0 reference errors"]},
    tags:["Google Apps Script","HTML/CSS/JS","Sheets API"],link:{k:"github",u:GH+"article-form"}},
   {id:"assess",cat:"auto",org:"B2B multinacional|B2B multinational",
-   es:{t:"Assessments de Sostenibilidad por Proveedor",d:"Divide un consolidado de 109 columnas en un fichero de evaluación por proveedor, lo envía y reconsolida las respuestas en el formato de importación del PIM. Solo conectores estándar de Microsoft 365.",m:["~135 proveedores","9 persona-días/ciclo eliminados","~900 filas reconsolidadas"]},
-   en:{t:"Supplier Sustainability Assessments",d:"Splits a 109-column consolidated file into one assessment file per supplier, sends it and re-consolidates the responses into the PIM import format. Standard Microsoft 365 connectors only.",m:["~135 suppliers","9 person-days/cycle eliminated","~900 rows re-consolidated"]},
+   es:{t:"Assessments de Sostenibilidad por Proveedor",d:"Rediseño end-to-end del ciclo de evaluación: un consolidado de 109 columnas se divide en un fichero por proveedor, se envía y las respuestas se reconsolidan en el formato de importación del PIM. Pasos manuales y handoffs eliminados; revisión humana solo en excepciones. Solo conectores estándar de Microsoft 365.",m:["~135 proveedores","9 persona-días/ciclo eliminados","~900 filas reconsolidadas"]},
+   en:{t:"Supplier Sustainability Assessments",d:"End-to-end redesign of the assessment cycle: a 109-column consolidated file is split into one file per supplier, sent out, and responses are re-consolidated into the PIM import format. Manual steps and handoffs removed; human review only on exceptions. Standard Microsoft 365 connectors only.",m:["~135 suppliers","9 person-days/cycle eliminated","~900 rows re-consolidated"]},
    tags:["Power Automate","Office Scripts","SharePoint","Excel avanzado"],link:{k:"github",u:GH+"supplier-sustainability-assessments"}},
   {id:"cost",cat:"auto",org:"B2B multinacional|B2B multinational",
-   es:{t:"Petición Anual de Costes a Proveedores",d:"Extrae de un catálogo maestro los productos de cada proveedor, genera su Excel de tarifas y prepara el correo con adjuntos en un buzón compartido para revisión.",m:["~300 proveedores","~40.000 filas procesadas","2 adjuntos por correo"]},
-   en:{t:"Annual Supplier Cost Request",d:"Extracts each supplier's products from a master catalog, generates their price file and prepares the email with attachments in a shared mailbox for review.",m:["~300 suppliers","~40,000 rows processed","2 attachments per email"]},
+   es:{t:"Petición Anual de Costes a Proveedores",d:"Rediseño end-to-end de la campaña anual de costes: extrae del catálogo maestro los productos de cada proveedor, genera su Excel de tarifas y deja el correo con adjuntos listo en un buzón compartido. Pasos manuales y handoffs eliminados; la persona solo revisa el borrador antes de enviar.",m:["~300 proveedores","~40.000 filas procesadas","2 adjuntos por correo"]},
+   en:{t:"Annual Supplier Cost Request",d:"End-to-end redesign of the annual cost campaign: extracts each supplier's products from the master catalog, generates their price file and leaves the email with attachments ready in a shared mailbox. Manual steps and handoffs removed; people only review the draft before sending.",m:["~300 suppliers","~40,000 rows processed","2 attachments per email"]},
    tags:["Power Automate","Office Scripts","SharePoint","Outlook"],link:{k:"github",u:GH+"supplier-cost-request"}},
   {id:"comp",cat:"auto",org:"B2B multinacional|B2B multinational",
-   es:{t:"Envío de Documentación de Compliance",d:"Cruza dos bases de datos de producto y envase, genera solo los ficheros que tienen datos y envía correos bilingües con adjuntos dinámicos.",m:["2 bases de datos","1–2 adjuntos dinámicos","ES / EN"]},
-   en:{t:"Compliance Documentation Mailing",d:"Joins two product and packaging databases, generates only the files that contain data and sends bilingual emails with dynamic attachments.",m:["2 databases","1–2 dynamic attachments","ES / EN"]},
+   es:{t:"Envío de Documentación de Compliance",d:"Rediseño end-to-end del envío de compliance: cruza las bases de datos de producto y envase, genera solo los ficheros que tienen datos y envía correos bilingües con adjuntos dinámicos. Pasos manuales y handoffs eliminados; revisión humana solo en excepciones.",m:["2 bases de datos","1–2 adjuntos dinámicos","ES / EN"]},
+   en:{t:"Compliance Documentation Mailing",d:"End-to-end redesign of compliance mailing: joins the product and packaging databases, generates only the files that contain data and sends bilingual emails with dynamic attachments. Manual steps and handoffs removed; human review only on exceptions.",m:["2 databases","1–2 dynamic attachments","ES / EN"]},
    tags:["Power Automate","Office Scripts","SharePoint","Outlook"],link:{k:"github",u:GH+"supplier-compliance-mailing"}},
   {id:"procmap",cat:"app",org:"B2B multinacional|B2B multinational",
-   es:{t:"Mapa de Procesos de Marketing",d:"App de Power Apps que muestra cómo funciona cada proceso de Marketing: pasos, responsables y estado de automatización. Las propuestas del equipo entran por Forms, un flujo las registra en SharePoint y la app las lee en directo, con diagrama por responsable y filtros.",m:["4 procesos","33 pasos mapeados","16 automatizados o en curso","0 licencias Premium"]},
-   en:{t:"Marketing Process Map",d:"Power Apps app showing how each Marketing process works: steps, owners and automation status. Team proposals come in through Forms, a flow logs them in SharePoint and the app reads them live, with a swimlane diagram per owner and filters.",m:["4 processes","33 steps mapped","16 automated or in progress","0 Premium licences"]},
+   es:{t:"Mapa de Procesos de Marketing",d:"Mapeo AS-IS de los procesos de Marketing e identificación de oportunidades de automatización e IA: app de Power Apps con pasos, responsables y estado de cada paso. Las propuestas del equipo entran por Forms, un flujo las registra en SharePoint y la app las muestra en directo con diagrama por responsable.",m:["4 procesos","33 pasos mapeados","16 automatizados o en curso","0 licencias Premium"]},
+   en:{t:"Marketing Process Map",d:"AS-IS mapping of Marketing processes and identification of automation and AI opportunities: a Power Apps app with steps, owners and the status of each step. Team proposals come in through Forms, a flow logs them in SharePoint and the app shows them live in a swimlane diagram per owner.",m:["4 processes","33 steps mapped","16 automated or in progress","0 Premium licences"]},
    tags:["Power Apps","Power Automate","Microsoft Forms","SharePoint"],link:{k:"github",u:GH+"marketing-process-map"}},
   {id:"clinic",cat:"demo",org:"ATNIA",
    es:{t:"Recuperación de Presupuestos para Clínicas",d:"Demo interactiva: secuencia automática de 4 mensajes de WhatsApp con lógica de parada cuando el paciente responde, panel de seguimiento en tiempo real y alertas al equipo.",m:["30% de presupuestos recuperados","Demo en producción"]},
@@ -504,6 +511,7 @@ const PROJECTS = [
    en:{t:"Fluke 435-II Technical Guide",d:"Step-by-step guide for non-technical staff on the Fluke 435-II power quality analyzer and Power Log reports. Created to preserve institutional knowledge.",m:["Knowledge transfer","6 illustrated pages"]},
    tags:["Documentación técnica","Knowledge management"],link:{k:"internal"}}
 ];
+const TAG_EN = {"Excel avanzado":"Advanced Excel","Fórmulas dinámicas":"Dynamic formulas","5 fuentes":"5 sources","Documentación técnica":"Technical documentation"};
 const CAT_LABEL = {auto:"f.auto",app:"f.app",bi:"f.bi",demo:"f.demo",doc:"f.doc"};
 
 // ── LIVE FLOWS ── (project: id in PROJECTS)
@@ -569,6 +577,8 @@ function applyLang(){
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach(el => { const v = T[lang][el.dataset.i18n]; if(v !== undefined) el.innerHTML = v; });
   $("langBtn").innerHTML = lang === "es" ? "<b>ES</b> · EN" : "ES · <b>EN</b>";
+  $("runPanel").setAttribute("aria-label", t("aria.run"));
+  $("filters").setAttribute("aria-label", t("aria.filters"));
   document.querySelectorAll(".cv-link").forEach(a => a.href = "cv/CV_Brenda_Fabri_" + lang.toUpperCase() + ".pdf");
   renderFilters(); renderProjects(); tabs(); restartFlow();
 }
@@ -600,7 +610,7 @@ function renderProjects(){
       <h3>${c.t}</h3>
       <p>${c.d}</p>
       <div class="metrics">${c.m.map(x => `<span>${x}</span>`).join("")}</div>
-      <div class="tags">${p.tags.map(x => `<span class="tag">${x}</span>`).join("")}</div>
+      <div class="tags">${p.tags.map(x => `<span class="tag">${lang === "en" && TAG_EN[x] || x}</span>`).join("")}</div>
       <div class="card-link">${linkHtml(p.link)}</div>
     </article>`;
   }).join("");
